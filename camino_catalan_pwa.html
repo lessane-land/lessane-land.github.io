@@ -7,1363 +7,738 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Camino">
 <meta name="theme-color" content="#1a1108">
-<meta name="description" content="Camí de Sant Jaume — Catalan Way pilgrim guide from Sant Pere de Rodes to Girona">
 <title>Camino Catalán</title>
-
-<!-- PWA Manifest inline -->
 <script>
-const manifestData = {
-  name: "Camino Catalán",
-  short_name: "Camino",
-  description: "Camí de Sant Jaume pilgrim guide to Girona",
-  start_url: ".",
-  display: "standalone",
-  background_color: "#1a1108",
-  theme_color: "#1a1108",
-  orientation: "portrait",
-  icons: [
-    { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='40' fill='%231a1108'/%3E%3Ctext x='96' y='130' text-anchor='middle' font-size='110'%3E🐚%3C/text%3E%3C/svg%3E", sizes: "192x192", type: "image/svg+xml" },
-    { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='100' fill='%231a1108'/%3E%3Ctext x='256' y='340' text-anchor='middle' font-size='290'%3E🐚%3C/text%3E%3C/svg%3E", sizes: "512x512", type: "image/svg+xml" }
-  ]
-};
-const blob = new Blob([JSON.stringify(manifestData)], {type: 'application/json'});
-const manifestURL = URL.createObjectURL(blob);
-document.write('<link rel="manifest" href="' + manifestURL + '">');
+const md={name:"Camino Catalán",short_name:"Camino",display:"standalone",background_color:"#1a1108",theme_color:"#1a1108",icons:[{src:"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='40' fill='%231a1108'/%3E%3Cpath d='M96 30C62 30 35 57 35 96c0 24 12 44 30 57 5 3 11-2 9-8-6-10-8-22-4-33 6-16 20-25 26-25s20 9 26 25c4 11 2 23-4 33-2 6 4 11 9 8 18-13 30-33 30-57 0-39-27-66-61-66z' fill='%23c8823a'/%3E%3C/svg%3E",sizes:"192x192",type:"image/svg+xml"}]};
+const b=new Blob([JSON.stringify(md)],{type:'application/json'});
+document.write('<link rel="manifest" href="'+URL.createObjectURL(b)+'">');
 </script>
-
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='38' fill='%231a1108'/%3E%3Ctext x='90' y='122' text-anchor='middle' font-size='100'%3E🐚%3C/text%3E%3C/svg%3E">
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #f5f0e8;
-  --bg2: #ede5d4;
-  --bg3: #e4d9c4;
-  --card: #ffffff;
-  --text: #1a1108;
-  --text2: #5c4a2a;
-  --text3: #9c8060;
-  --border: rgba(92,74,42,0.15);
-  --gold: #c8823a;
-  --gold2: #e8a85a;
-  --teal: #2a6a6a;
-  --teal2: #3a8a8a;
-  --purple: #7a3a8a;
-  --green: #2a5c2a;
-  --s1: #c8823a;
-  --s2: #2a6a6a;
-  --s3: #7a3a8a;
-  --tab-h: 82px;
-  --header-h: 56px;
-  --safe-top: env(safe-area-inset-top, 44px);
-  --safe-bottom: env(safe-area-inset-bottom, 20px);
-  --safe-left: env(safe-area-inset-left, 0px);
-  --safe-right: env(safe-area-inset-right, 0px);
+:root{
+  --bg:#f5f0e8;--bg2:#ede5d4;--card:#fff;--text:#1a1108;--text2:#5c4a2a;--text3:#9c8060;
+  --border:rgba(92,74,42,.15);--shadow:0 1px 12px rgba(42,31,20,.08);
+  --gold:#c8823a;--gold2:#e8a85a;--teal:#2a6a6a;--purple:#7a3a8a;--green:#2a5c2a;--red:#b83030;
+  --s1:#c8823a;--s2:#2a6a6a;--s3:#7a3a8a;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #12100a;
-    --bg2: #1c180f;
-    --bg3: #252015;
-    --card: #1e1a10;
-    --text: #f0e8d8;
-    --text2: #c8aa80;
-    --text3: #806848;
-    --border: rgba(200,170,128,0.12);
-    --gold: #e8a85a;
-    --gold2: #f0c080;
-    --teal: #4ab0b0;
-    --teal2: #60c8c8;
-    --purple: #b060c8;
-    --green: #50a850;
-  }
+@media(prefers-color-scheme:dark){
+  :root{--bg:#12100a;--bg2:#1c180f;--card:#1e1a10;--text:#f0e8d8;--text2:#c8aa80;--text3:#806848;
+  --border:rgba(200,170,128,.12);--gold:#e8a85a;--gold2:#f0c080;--teal:#4ab0b0;--purple:#b060c8;--green:#50a850;--red:#e05050;}
 }
-
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-
-html, body {
-  height: 100%;
-  overflow: hidden;
-  font-family: 'DM Sans', -apple-system, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  -webkit-font-smoothing: antialiased;
-}
-
-/* ── APP SHELL ── */
-#app {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  height: 100dvh;
-  overflow: hidden;
-}
-
-/* ── HEADER ── */
-.app-header {
-  background: var(--bg);
-  border-bottom: 0.5px solid var(--border);
-  padding: calc(var(--safe-top) + 8px) 20px 12px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  flex-shrink: 0;
-  position: relative;
-  z-index: 10;
-}
-.header-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 28px;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: -0.02em;
-}
-.header-title span { color: var(--gold); }
-.header-subtitle {
-  font-size: 13px;
-  color: var(--text3);
-  margin-top: 3px;
-  font-weight: 300;
-}
-.header-badge {
-  background: var(--gold);
-  color: white;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 5px 10px;
-  border-radius: 20px;
-  letter-spacing: 0.04em;
-}
-
-/* ── SCROLL AREA ── */
-#scroll-area {
-  flex: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
-  scroll-behavior: smooth;
-  padding-bottom: calc(var(--tab-h) + var(--safe-bottom) + 20px);
-}
-
-/* ── PAGES ── */
-.page { display: none; padding: 0; }
-.page.active { display: block; animation: fadeSlideIn .25s ease; }
-@keyframes fadeSlideIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ── BOTTOM TAB BAR ── */
-.tab-bar {
-  position: fixed;
-  bottom: 0; left: 0; right: 0;
-  height: calc(var(--tab-h) + var(--safe-bottom));
-  padding-bottom: var(--safe-bottom);
-  background: var(--bg);
-  border-top: 0.5px solid var(--border);
-  display: flex;
-  align-items: stretch;
-  z-index: 100;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-}
-.tab-btn {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  border: none;
-  background: none;
-  cursor: pointer;
-  padding: 8px 4px;
-  transition: opacity .15s;
-  -webkit-tap-highlight-color: transparent;
-}
-.tab-btn:active { opacity: 0.6; transform: scale(0.92); }
-.tab-icon { font-size: 22px; line-height: 1; transition: transform .2s; }
-.tab-btn.active .tab-icon { transform: scale(1.12); }
-.tab-label {
-  font-size: 10px;
-  font-weight: 500;
-  color: var(--text3);
-  letter-spacing: 0.03em;
-}
-.tab-btn.active .tab-label { color: var(--gold); font-weight: 600; }
-.tab-btn.active[data-page="stages"] .tab-label { color: var(--gold); }
-.tab-btn.active[data-page="weather"] .tab-label { color: var(--teal); }
-.tab-btn.active[data-page="transport"] .tab-label { color: var(--purple); }
-.tab-btn.active[data-page="checklist"] .tab-label { color: var(--green); }
-
-/* ── SHARED COMPONENTS ── */
-.section-pad { padding: 16px 16px 0; }
-.section-title {
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text3);
-  margin-bottom: 10px;
-  margin-top: 20px;
-  padding: 0 16px;
-}
-.section-title:first-child { margin-top: 16px; }
-
-.card {
-  background: var(--card);
-  border: 0.5px solid var(--border);
-  border-radius: 16px;
-  overflow: hidden;
-  margin: 0 16px;
-}
-.card + .card { margin-top: 10px; }
-
-.row {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 14px 16px;
-  border-bottom: 0.5px solid var(--border);
-}
-.row:last-child { border-bottom: none; }
-
-.pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 3px 9px;
-  border-radius: 20px;
-}
-.pill-gold { background: rgba(200,130,58,0.15); color: var(--gold); }
-.pill-teal { background: rgba(42,106,106,0.12); color: var(--teal); }
-.pill-purple { background: rgba(122,58,138,0.12); color: var(--purple); }
-.pill-green { background: rgba(42,92,42,0.12); color: var(--green); }
-
-/* ── OVERVIEW PAGE ── */
-.hero-overview {
-  background: var(--text);
-  color: var(--bg);
-  padding: 20px 20px 24px;
-  position: relative;
-  overflow: hidden;
-}
-.hero-overview::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(200,130,58,0.06) 30px, rgba(200,130,58,0.06) 31px);
-}
-.hero-shell {
-  position: absolute;
-  right: -10px; top: 50%; transform: translateY(-55%);
-  font-size: 120px;
-  opacity: 0.06;
-  user-select: none;
-  line-height: 1;
-}
-.hero-ov-label {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--gold2);
-  opacity: 0.8;
-  margin-bottom: 8px;
-  position: relative;
-}
-.hero-ov-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 26px;
-  font-weight: 700;
-  line-height: 1.15;
-  position: relative;
-  margin-bottom: 6px;
-}
-.hero-ov-sub { font-size: 13px; opacity: 0.6; position: relative; line-height: 1.5; }
-.hero-stats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0;
-  margin-top: 20px;
-  padding-top: 16px;
-  border-top: 1px solid rgba(200,130,58,0.2);
-  position: relative;
-}
-.h-stat { text-align: center; }
-.h-stat-v { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--gold2); }
-.h-stat-l { font-size: 10px; opacity: 0.55; margin-top: 2px; }
-
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden;font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+#app{display:flex;flex-direction:column;height:100vh;height:100dvh;overflow:hidden}
+/* HEADER */
+.hdr{background:var(--bg);border-bottom:.5px solid var(--border);padding:calc(env(safe-area-inset-top,44px) + 6px) 18px 12px;display:flex;align-items:flex-end;justify-content:space-between;flex-shrink:0;z-index:10}
+.hdr-l{display:flex;align-items:center;gap:10px}
+.hdr-title{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;line-height:1;letter-spacing:-.02em}
+.hdr-title span{color:var(--gold)}
+.hdr-sub{font-size:12px;color:var(--text3);margin-top:2px;font-weight:300}
+.hdr-badge{background:var(--gold);color:#fff;font-size:11px;font-weight:600;padding:5px 11px;border-radius:20px;display:flex;align-items:center;gap:5px}
+/* SCROLL */
+#sa{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding-bottom:calc(82px + env(safe-area-inset-bottom,20px) + 16px)}
+/* PAGES */
+.page{display:none}
+.page.active{display:block;animation:fu .22s ease}
+@keyframes fu{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+/* TABS */
+.tabs{position:fixed;bottom:0;left:0;right:0;height:calc(82px + env(safe-area-inset-bottom,20px));padding-bottom:env(safe-area-inset-bottom,20px);background:var(--bg);border-top:.5px solid var(--border);display:flex;align-items:stretch;z-index:100;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.tb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border:none;background:none;cursor:pointer;padding:8px 2px;transition:opacity .12s}
+.tb:active{opacity:.5;transform:scale(.93)}
+.tb-iw{width:26px;height:26px;display:flex;align-items:center;justify-content:center;transition:transform .2s}
+.tb.active .tb-iw{transform:scale(1.15)}
+.tb-iw svg{stroke:var(--text3);transition:stroke .15s}
+.tb.active .tb-iw svg{stroke:var(--gold)}
+.tb-l{font-size:10px;font-weight:500;color:var(--text3);letter-spacing:.03em;transition:color .15s}
+.tb.active .tb-l{color:var(--gold);font-weight:600}
+/* SHARED */
+.st{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin:20px 16px 10px;display:flex;align-items:center;gap:6px}
+.st svg{stroke:var(--text3)}
+/* HERO */
+.hero{background:var(--text);color:var(--bg);padding:22px 20px 26px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 30px,rgba(200,130,58,.05) 30px,rgba(200,130,58,.05) 31px)}
+.hero-shell{position:absolute;right:-8px;top:50%;transform:translateY(-52%);opacity:.07}
+.hero-lbl{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold2);opacity:.85;margin-bottom:8px;position:relative;display:flex;align-items:center;gap:5px}
+.hero-lbl svg{stroke:var(--gold2)}
+.hero-h1{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;line-height:1.15;position:relative;margin-bottom:6px}
+.hero-sub{font-size:13px;opacity:.6;position:relative;line-height:1.5;max-width:280px}
+.hstats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:20px;padding-top:16px;border-top:1px solid rgba(200,130,58,.2);position:relative}
+.hstat-v{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--gold2);text-align:center}
+.hstat-l{font-size:10px;opacity:.5;margin-top:2px;text-align:center}
+/* INSTALL */
+.ib{background:var(--text);color:var(--bg);margin:16px;border-radius:16px;padding:16px;display:flex;gap:12px;align-items:flex-start}
+.ib-ico{width:36px;height:36px;background:rgba(200,130,58,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ib-ico svg{stroke:var(--gold2)}
+.ib h4{font-size:14px;font-weight:600;margin-bottom:4px;color:var(--gold2)}
+.ib p{font-size:12px;opacity:.7;line-height:1.5}
+.ib-steps{margin-top:10px;display:flex;flex-direction:column;gap:7px}
+.ib-step{display:flex;align-items:flex-start;gap:8px;font-size:12px;opacity:.85}
+.ib-sn{width:20px;height:20px;border-radius:50%;background:var(--gold);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.ib-x{background:none;border:none;color:var(--bg);opacity:.45;font-size:18px;cursor:pointer;padding:0;align-self:flex-start;line-height:1}
+/* PROGRESS */
+.prog-c{background:var(--card);border:.5px solid var(--border);border-radius:16px;padding:16px;margin:0 16px;box-shadow:var(--shadow)}
+.prog-r{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.prog-lbl{font-size:13px;font-weight:500;display:flex;align-items:center;gap:6px}
+.prog-lbl svg{stroke:var(--text2)}
+.prog-t{background:var(--bg2);border-radius:20px;height:6px;overflow:hidden;margin-bottom:12px}
+.prog-f{height:100%;border-radius:20px;transition:width .6s ease}
+.prog-ss{display:flex;gap:10px}
+.ps{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text3)}
+.psd{width:8px;height:8px;border-radius:50%}
 /* STAGE CARDS */
-.stage-card {
-  background: var(--card);
-  border: 0.5px solid var(--border);
-  border-radius: 16px;
-  margin: 0 16px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform .15s;
-  -webkit-tap-highlight-color: transparent;
-}
-.stage-card:active { transform: scale(0.98); }
-.sc-header {
-  padding: 16px 16px 12px;
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-}
-.sc-num {
-  width: 42px; height: 42px;
-  border-radius: 12px;
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Playfair Display', serif;
-  font-size: 20px; font-weight: 700;
-  color: white;
-  flex-shrink: 0;
-}
-.sc-body h3 { font-size: 15px; font-weight: 600; margin-bottom: 4px; line-height: 1.2; }
-.sc-body p { font-size: 12px; color: var(--text3); line-height: 1.4; }
-.sc-chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
-.sc-chip {
-  font-size: 11px; font-weight: 500;
-  padding: 3px 9px; border-radius: 20px;
-  background: var(--bg2);
-  color: var(--text2);
-}
-.sc-footer {
-  border-top: 0.5px solid var(--border);
-  padding: 10px 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.sc-footer-stat { text-align: center; }
-.sc-footer-stat .v { font-size: 15px; font-weight: 600; font-family: 'Playfair Display', serif; }
-.sc-footer-stat .l { font-size: 10px; color: var(--text3); margin-top: 1px; }
-.sc-arrow { font-size: 18px; color: var(--text3); }
-
-/* PROGRESS BAR */
-.progress-card {
-  background: var(--card);
-  border: 0.5px solid var(--border);
-  border-radius: 16px;
-  padding: 16px;
-  margin: 0 16px;
-}
-.prog-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-.prog-label { font-size: 13px; font-weight: 500; }
-.prog-pct { font-size: 13px; color: var(--text3); }
-.prog-track {
-  background: var(--bg2);
-  border-radius: 20px;
-  height: 6px;
-  overflow: hidden;
-  margin-bottom: 12px;
-}
-.prog-fill {
-  height: 100%;
-  border-radius: 20px;
-  transition: width .6s ease;
-}
-.prog-stages { display: flex; gap: 8px; }
-.ps { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text3); }
-.ps-dot { width: 8px; height: 8px; border-radius: 50%; }
-
-/* ── STAGES DETAIL PAGE ── */
-.stage-picker {
-  display: flex;
-  gap: 8px;
-  padding: 16px 16px 0;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-.stage-picker::-webkit-scrollbar { display: none; }
-.sp-btn {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
-  border: 1.5px solid var(--border);
-  border-radius: 20px;
-  background: var(--card);
-  cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text2);
-  transition: all .15s;
-  -webkit-tap-highlight-color: transparent;
-}
-.sp-btn:active { transform: scale(0.96); }
-.sp-btn.active { color: white; border-color: transparent; }
-.sp-dot { width: 8px; height: 8px; border-radius: 50%; }
-
-/* ELEVATION CHART */
-.chart-wrap {
-  background: var(--card);
-  border: 0.5px solid var(--border);
-  border-radius: 16px;
-  margin: 0 16px;
-  padding: 16px;
-}
-.chart-wrap h4 { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text3); margin-bottom: 12px; }
-.chart-container { position: relative; height: 140px; }
-
+.sc{background:var(--card);border:.5px solid var(--border);border-radius:16px;margin:0 16px;overflow:hidden;cursor:pointer;transition:transform .15s;box-shadow:var(--shadow)}
+.sc:active{transform:scale(.98)}
+.sc-h{padding:15px 16px 12px;display:flex;align-items:flex-start;gap:14px}
+.sc-n{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff;flex-shrink:0}
+.sc-b h3{font-size:15px;font-weight:600;margin-bottom:4px;line-height:1.2}
+.sc-b p{font-size:12px;color:var(--text3);line-height:1.4}
+.chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
+.chip{font-size:11px;font-weight:500;padding:3px 8px;border-radius:20px;background:var(--bg2);color:var(--text2)}
+.sc-f{border-top:.5px solid var(--border);padding:10px 16px;display:flex;justify-content:space-between;align-items:center}
+.sc-s .v{font-size:15px;font-weight:600;font-family:'Playfair Display',serif}
+.sc-s .l{font-size:10px;color:var(--text3);margin-top:1px}
+/* STAGE PICKER */
+.spk{display:flex;gap:8px;padding:16px 16px 0;overflow-x:auto;scrollbar-width:none}
+.spk::-webkit-scrollbar{display:none}
+.spb{flex-shrink:0;display:flex;align-items:center;gap:7px;padding:8px 14px;border:1.5px solid var(--border);border-radius:20px;background:var(--card);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--text2);transition:all .15s}
+.spb:active{transform:scale(.96)}
+.spb.active{color:#fff;border-color:transparent}
+.spb.active svg{stroke:#fff!important}
+.sp-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+/* CHART */
+.cw{background:var(--card);border:.5px solid var(--border);border-radius:16px;margin:0 16px;padding:16px;box-shadow:var(--shadow)}
+.cc{position:relative;height:140px}
 /* WAYPOINTS */
-.wp-list { margin: 0 16px; }
-.wp-item {
-  display: flex;
-  gap: 0;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-.wp-left {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 40px;
-  flex-shrink: 0;
-  padding-top: 16px;
-}
-.wp-circle {
-  width: 14px; height: 14px;
-  border-radius: 50%;
-  border: 2px solid var(--bg);
-  flex-shrink: 0;
-  box-shadow: 0 0 0 1.5px var(--border);
-}
-.wp-vline { flex: 1; width: 1.5px; margin-top: 3px; }
-.wp-item:last-child .wp-vline { background: transparent !important; }
-.wp-right {
-  flex: 1;
-  background: var(--card);
-  border: 0.5px solid var(--border);
-  border-radius: 14px;
-  margin-bottom: 8px;
-  overflow: hidden;
-  transition: transform .12s;
-}
-.wp-item:active .wp-right { transform: scale(0.98); }
-.wp-main { padding: 12px 14px; display: flex; align-items: flex-start; gap: 10px; }
-.wp-info { flex: 1; }
-.wp-name { font-size: 14px; font-weight: 600; margin-bottom: 2px; line-height: 1.2; }
-.wp-meta { font-size: 12px; color: var(--text3); }
-.wp-tags-row { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 6px; }
-.wt {
-  font-size: 10px; font-weight: 600;
-  padding: 2px 7px; border-radius: 10px;
-}
-.wt-w { background: rgba(42,106,106,0.12); color: var(--teal); }
-.wt-f { background: rgba(200,130,58,0.12); color: var(--gold); }
-.wt-s { background: rgba(122,58,138,0.12); color: var(--purple); }
-.wt-c { background: rgba(200,50,50,0.1); color: #c83232; }
-.wt-t { background: rgba(42,92,42,0.12); color: var(--green); }
-.wp-chevron { font-size: 14px; color: var(--text3); margin-top: 2px; transition: transform .2s; }
-.wp-item.open .wp-chevron { transform: rotate(180deg); }
-.wp-detail-box {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height .3s ease;
-}
-.wp-item.open .wp-detail-box { max-height: 400px; }
-.wp-detail-inner {
-  padding: 12px 14px 14px;
-  border-top: 0.5px solid var(--border);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-.wd-block { font-size: 12px; line-height: 1.5; }
-.wd-block strong { display: block; font-size: 10px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text3); font-weight: 600; margin-bottom: 2px; }
-.wd-block a { color: var(--teal); text-decoration: none; }
-.wd-full { grid-column: 1 / -1; }
-
-/* ACCOMMODATION */
-.accom-scroll {
-  display: flex;
-  gap: 10px;
-  padding: 0 16px;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-.accom-scroll::-webkit-scrollbar { display: none; }
-.accom-item {
-  flex-shrink: 0;
-  width: 200px;
-  background: var(--card);
-  border: 0.5px solid var(--border);
-  border-radius: 14px;
-  padding: 14px;
-}
-.accom-name { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
-.accom-price {
-  display: inline-block;
-  background: rgba(42,92,42,0.12);
-  color: var(--green);
-  font-size: 11px;
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 10px;
-  margin-bottom: 8px;
-}
-.accom-desc { font-size: 12px; color: var(--text3); line-height: 1.4; }
-.accom-link { font-size: 11px; color: var(--teal); text-decoration: none; display: block; margin-top: 6px; }
-
+.wpl{margin:0 16px}
+.wpi{display:flex;cursor:pointer}
+.wpl-l{display:flex;flex-direction:column;align-items:center;width:38px;flex-shrink:0;padding-top:16px}
+.wp-dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--bg);flex-shrink:0;box-shadow:0 0 0 1.5px var(--border)}
+.wp-vl{flex:1;width:1.5px;margin-top:3px}
+.wpi:last-child .wp-vl{background:transparent!important}
+.wp-r{flex:1;background:var(--card);border:.5px solid var(--border);border-radius:14px;margin-bottom:8px;overflow:hidden;transition:transform .12s;box-shadow:var(--shadow)}
+.wpi:active .wp-r{transform:scale(.98)}
+.wp-m{padding:12px 13px;display:flex;align-items:flex-start;gap:10px}
+.wp-i{flex:1}
+.wp-name{font-size:14px;font-weight:600;margin-bottom:2px;line-height:1.2}
+.wp-mt{font-size:12px;color:var(--text3);display:flex;align-items:center;gap:4px}
+.wp-mt svg{stroke:var(--text3)}
+.wp-tr{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
+.wt{font-size:10px;font-weight:600;padding:2px 7px;border-radius:10px;display:flex;align-items:center;gap:3px}
+.wt svg{width:10px;height:10px}
+.wt-w{background:rgba(42,106,106,.12);color:var(--teal)}.wt-w svg{stroke:var(--teal)}
+.wt-f{background:rgba(200,130,58,.12);color:var(--gold)}.wt-f svg{stroke:var(--gold)}
+.wt-s{background:rgba(122,58,138,.12);color:var(--purple)}.wt-s svg{stroke:var(--purple)}
+.wt-c{background:rgba(184,48,48,.1);color:var(--red)}.wt-c svg{stroke:var(--red)}
+.wt-t{background:rgba(42,92,42,.12);color:var(--green)}.wt-t svg{stroke:var(--green)}
+.wp-ch{flex-shrink:0;margin-top:2px;transition:transform .2s}
+.wp-ch svg{stroke:var(--text3)}
+.wpi.open .wp-ch{transform:rotate(180deg)}
+.wp-db{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.wpi.open .wp-db{max-height:400px}
+.wp-di{padding:12px 13px 14px;border-top:.5px solid var(--border);display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.wdb{font-size:12px;line-height:1.5}
+.wdb strong{display:flex;align-items:center;gap:4px;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--text3);font-weight:600;margin-bottom:3px}
+.wdb strong svg{stroke:var(--text3)}
+.wdb a{color:var(--teal);text-decoration:none;display:inline-flex;align-items:center;gap:3px}
+.wdf{grid-column:1/-1}
+/* ACCOM */
+.asc{display:flex;gap:10px;padding:0 16px;overflow-x:auto;scrollbar-width:none}
+.asc::-webkit-scrollbar{display:none}
+.ai{flex-shrink:0;width:210px;background:var(--card);border:.5px solid var(--border);border-radius:14px;padding:14px;box-shadow:var(--shadow)}
+.ai-h{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.ai-ico{width:30px;height:30px;border-radius:8px;background:var(--bg2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ai-ico svg{stroke:var(--gold)}
+.ai-n{font-size:13px;font-weight:600;line-height:1.2}
+.ai-p{display:inline-flex;align-items:center;gap:4px;background:rgba(42,92,42,.12);color:var(--green);font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;margin-bottom:8px}
+.ai-p svg{stroke:var(--green)}
+.ai-d{font-size:12px;color:var(--text3);line-height:1.4}
+.ai-a{font-size:11px;color:var(--teal);text-decoration:none;display:inline-flex;align-items:center;gap:3px;margin-top:6px}
 /* TIPS */
-.tips-list { margin: 0 16px; display: flex; flex-direction: column; gap: 8px; }
-.tip-item {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  background: var(--card);
-  border: 0.5px solid var(--border);
-  border-radius: 14px;
-  padding: 12px 14px;
-}
-.tip-em { font-size: 18px; flex-shrink: 0; }
-.tip-text { font-size: 13px; line-height: 1.5; color: var(--text2); }
-.tip-text strong { color: var(--text); font-weight: 600; display: block; margin-bottom: 2px; }
-
-/* ── WEATHER PAGE ── */
-.season-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  padding: 0 16px;
-}
-.season-card {
-  background: var(--card);
-  border: 0.5px solid var(--border);
-  border-radius: 14px;
-  padding: 14px;
-}
-.season-icon { font-size: 28px; margin-bottom: 8px; }
-.season-name { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
-.season-rating { display: flex; gap: 2px; margin-bottom: 6px; }
-.star { font-size: 12px; }
-.season-desc { font-size: 12px; color: var(--text3); line-height: 1.4; }
-.season-card.best { border-color: var(--gold); }
-.best-badge {
-  display: inline-block;
-  background: rgba(200,130,58,0.15);
-  color: var(--gold);
-  font-size: 10px;
-  font-weight: 700;
-  padding: 2px 7px;
-  border-radius: 10px;
-  margin-bottom: 6px;
-}
-
-.temp-chart { margin: 0 16px; }
-.month-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 8px;
-}
-.month-name { font-size: 12px; font-weight: 500; width: 28px; color: var(--text2); }
-.month-bar-wrap { flex: 1; height: 22px; background: var(--bg2); border-radius: 6px; overflow: hidden; position: relative; }
-.month-bar { height: 100%; border-radius: 6px; display: flex; align-items: center; padding-left: 8px; font-size: 11px; font-weight: 600; color: white; }
-.month-notes { font-size: 11px; color: var(--text3); width: 80px; text-align: right; }
-
-.wind-card {
-  background: rgba(42,106,106,0.08);
-  border: 1px solid rgba(42,106,106,0.2);
-  border-radius: 14px;
-  padding: 14px;
-  margin: 0 16px;
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-}
-.wind-icon { font-size: 28px; }
-.wind-body h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; color: var(--teal); }
-.wind-body p { font-size: 13px; color: var(--text2); line-height: 1.5; }
-
-/* ── TRANSPORT PAGE ── */
-.transport-section { margin: 0 16px; }
-.transport-route {
-  background: var(--card);
-  border: 0.5px solid var(--border);
-  border-radius: 14px;
-  overflow: hidden;
-  margin-bottom: 10px;
-}
-.tr-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 16px;
-  border-bottom: 0.5px solid var(--border);
-}
-.tr-icon { font-size: 22px; }
-.tr-title { font-size: 14px; font-weight: 600; }
-.tr-sub { font-size: 12px; color: var(--text3); margin-top: 2px; }
-.tr-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 16px;
-  border-bottom: 0.5px solid var(--border);
-}
-.tr-row:last-child { border-bottom: none; }
-.tr-from-to { font-size: 13px; font-weight: 500; }
-.tr-detail { font-size: 12px; color: var(--text3); margin-top: 2px; }
-.tr-link {
-  font-size: 12px;
-  color: var(--teal);
-  text-decoration: none;
-  background: rgba(42,106,106,0.08);
-  padding: 5px 10px;
-  border-radius: 10px;
-  font-weight: 500;
-  flex-shrink: 0;
-}
-
-.emergency-card {
-  background: rgba(200,50,50,0.06);
-  border: 1px solid rgba(200,50,50,0.15);
-  border-radius: 14px;
-  padding: 14px;
-  margin: 0 16px;
-}
-.ec-title { font-size: 13px; font-weight: 600; color: #c83232; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
-.ec-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 0.5px solid rgba(200,50,50,0.1); font-size: 13px; }
-.ec-row:last-child { border-bottom: none; }
-.ec-num { font-weight: 600; color: #c83232; }
-
-/* ── CHECKLIST PAGE ── */
-.checklist-progress {
-  background: var(--card);
-  border: 0.5px solid var(--border);
-  border-radius: 16px;
-  padding: 16px;
-  margin: 0 16px;
-}
-.cl-prog-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-.cl-prog-title { font-size: 14px; font-weight: 600; }
-.cl-prog-count { font-size: 13px; color: var(--text3); }
-.cl-prog-track { background: var(--bg2); border-radius: 20px; height: 8px; overflow: hidden; }
-.cl-prog-fill { height: 100%; border-radius: 20px; background: linear-gradient(90deg, var(--green), #60c060); transition: width .4s ease; }
-.cl-reset-btn {
-  font-size: 12px;
-  color: var(--text3);
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 4px 0;
-  margin-top: 8px;
-  text-decoration: underline;
-  font-family: 'DM Sans', sans-serif;
-}
-
-.checklist-group {
-  background: var(--card);
-  border: 0.5px solid var(--border);
-  border-radius: 16px;
-  overflow: hidden;
-  margin: 0 16px;
-}
-.cl-group-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 16px;
-  border-bottom: 0.5px solid var(--border);
-  background: var(--bg2);
-}
-.cl-group-icon { font-size: 18px; }
-.cl-group-name { font-size: 13px; font-weight: 600; }
-.cl-item {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 12px 16px;
-  border-bottom: 0.5px solid var(--border);
-  cursor: pointer;
-  transition: background .1s;
-  -webkit-tap-highlight-color: transparent;
-}
-.cl-item:last-child { border-bottom: none; }
-.cl-item:active { background: var(--bg2); }
-.cl-checkbox {
-  width: 22px; height: 22px;
-  border-radius: 50%;
-  border: 2px solid var(--border);
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-  transition: all .15s;
-}
-.cl-item.checked .cl-checkbox {
-  background: var(--green);
-  border-color: var(--green);
-}
-.cl-check-icon { font-size: 12px; color: white; display: none; }
-.cl-item.checked .cl-check-icon { display: block; }
-.cl-item-text { flex: 1; }
-.cl-item-name { font-size: 14px; transition: color .15s; }
-.cl-item.checked .cl-item-name { color: var(--text3); text-decoration: line-through; }
-.cl-item-note { font-size: 11px; color: var(--text3); margin-top: 2px; line-height: 1.3; }
-.cl-priority {
-  font-size: 10px;
-  font-weight: 700;
-  padding: 2px 6px;
-  border-radius: 8px;
-  flex-shrink: 0;
-}
-.pri-high { background: rgba(200,50,50,0.1); color: #c83232; }
-.pri-med { background: rgba(200,130,58,0.12); color: var(--gold); }
-
-/* ── INSTALL BANNER ── */
-.install-banner {
-  background: var(--text);
-  color: var(--bg);
-  margin: 16px;
-  border-radius: 16px;
-  padding: 16px;
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-}
-.ib-icon { font-size: 28px; flex-shrink: 0; }
-.ib-body h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; color: var(--gold2); }
-.ib-body p { font-size: 12px; opacity: 0.75; line-height: 1.5; }
-.ib-steps { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
-.ib-step { display: flex; align-items: center; gap: 8px; font-size: 12px; opacity: 0.85; }
-.ib-step-num {
-  width: 20px; height: 20px;
-  border-radius: 50%;
-  background: var(--gold);
-  color: white;
-  font-size: 11px;
-  font-weight: 700;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-}
-.ib-dismiss {
-  background: none; border: none; color: var(--bg); opacity: 0.5;
-  font-size: 18px; cursor: pointer; padding: 0; align-self: flex-start;
-  font-family: sans-serif; line-height: 1;
-}
+.tpl{margin:0 16px;display:flex;flex-direction:column;gap:8px}
+.tpi{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:.5px solid var(--border);border-radius:14px;padding:12px 14px;box-shadow:var(--shadow)}
+.tpi-iw{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tpi-t{font-size:13px;line-height:1.5;color:var(--text2)}
+.tpi-t strong{color:var(--text);font-weight:600;display:block;margin-bottom:2px}
+/* WEATHER */
+.wind{background:rgba(42,106,106,.08);border:1px solid rgba(42,106,106,.2);border-radius:14px;padding:14px;margin:16px 16px 0;display:flex;gap:12px;align-items:flex-start}
+.wind-iw{width:40px;height:40px;background:rgba(42,106,106,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.wind-iw svg{stroke:var(--teal)}
+.wind-b h4{font-size:14px;font-weight:600;margin-bottom:4px;color:var(--teal)}
+.wind-b p{font-size:13px;color:var(--text2);line-height:1.5}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px}
+.scard{background:var(--card);border:.5px solid var(--border);border-radius:14px;padding:14px;box-shadow:var(--shadow)}
+.scard.best{border-color:var(--gold)}
+.s-iw{width:36px;height:36px;border-radius:10px;background:var(--bg2);display:flex;align-items:center;justify-content:center;margin-bottom:8px}
+.s-iw svg{stroke:var(--text3)}
+.scard.best .s-iw{background:rgba(200,130,58,.15)}
+.scard.best .s-iw svg{stroke:var(--gold)}
+.s-badge{display:inline-flex;align-items:center;gap:3px;background:rgba(200,130,58,.15);color:var(--gold);font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;margin-bottom:6px}
+.s-badge svg{stroke:var(--gold)}
+.s-name{font-size:13px;font-weight:600;margin-bottom:4px}
+.s-stars{display:flex;gap:2px;margin-bottom:6px}
+.s-desc{font-size:12px;color:var(--text3);line-height:1.4}
+.tc{margin:0 16px}
+.mr{display:flex;align-items:center;gap:10px;margin-bottom:7px}
+.mn{font-size:12px;font-weight:500;width:28px;color:var(--text2)}
+.mw{flex:1;height:22px;background:var(--bg2);border-radius:6px;overflow:hidden}
+.mb{height:100%;border-radius:6px;display:flex;align-items:center;padding-left:8px;font-size:11px;font-weight:600;color:#fff}
+.mnt{font-size:11px;color:var(--text3);width:82px;text-align:right}
+/* TRANSPORT */
+.tr-c{background:var(--card);border:.5px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:10px;box-shadow:var(--shadow)}
+.tr-h{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:.5px solid var(--border);background:var(--bg2)}
+.tr-hi{width:36px;height:36px;border-radius:9px;background:var(--card);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:var(--shadow)}
+.tr-hi svg{stroke:var(--gold)}
+.tr-ht{font-size:14px;font-weight:600}
+.tr-hs{font-size:12px;color:var(--text3);margin-top:2px}
+.tr-r{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:.5px solid var(--border);gap:10px}
+.tr-r:last-child{border-bottom:none}
+.tr-from{font-size:13px;font-weight:500;display:flex;align-items:center;gap:5px}
+.tr-from svg{stroke:var(--text3);flex-shrink:0}
+.tr-d{font-size:12px;color:var(--text3);margin-top:2px}
+.tr-lnk{font-size:12px;color:var(--teal);text-decoration:none;background:rgba(42,106,106,.08);padding:5px 10px;border-radius:10px;font-weight:500;flex-shrink:0;display:flex;align-items:center;gap:4px}
+.tr-lnk svg{stroke:var(--teal)}
+.em-c{background:rgba(184,48,48,.06);border:1px solid rgba(184,48,48,.15);border-radius:14px;padding:14px;margin:0 16px}
+.em-t{font-size:13px;font-weight:600;color:var(--red);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.em-t svg{stroke:var(--red)}
+.em-r{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:.5px solid rgba(184,48,48,.1);font-size:13px}
+.em-r:last-child{border-bottom:none}
+.em-n{font-weight:600;color:var(--red)}
+a.em-n{color:var(--teal);text-decoration:none;display:inline-flex;align-items:center;gap:4px}
+a.em-n svg{stroke:var(--teal)}
+/* CHECKLIST */
+.cl-prog{background:var(--card);border:.5px solid var(--border);border-radius:16px;padding:16px;margin:16px 16px 0;box-shadow:var(--shadow)}
+.cl-ph{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.cl-pt{font-size:14px;font-weight:600;display:flex;align-items:center;gap:6px}
+.cl-pt svg{stroke:var(--green)}
+.cl-pc{font-size:13px;color:var(--text3)}
+.cl-t{background:var(--bg2);border-radius:20px;height:8px;overflow:hidden}
+.cl-f{height:100%;border-radius:20px;background:linear-gradient(90deg,var(--green),#60c060);transition:width .4s ease}
+.cl-rst{font-size:12px;color:var(--text3);background:none;border:none;cursor:pointer;padding:4px 0;margin-top:8px;text-decoration:underline;font-family:inherit;display:flex;align-items:center;gap:4px}
+.cl-rst svg{stroke:var(--text3)}
+.cl-g{background:var(--card);border:.5px solid var(--border);border-radius:16px;overflow:hidden;margin:0 16px;box-shadow:var(--shadow)}
+.cl-gh{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:.5px solid var(--border);background:var(--bg2)}
+.cl-gh svg{stroke:var(--text2)}
+.cl-gn{font-size:13px;font-weight:600}
+.cl-i{display:flex;align-items:center;gap:13px;padding:12px 16px;border-bottom:.5px solid var(--border);cursor:pointer;transition:background .1s}
+.cl-i:last-child{border-bottom:none}
+.cl-i:active{background:var(--bg2)}
+.cl-cb{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
+.cl-i.checked .cl-cb{background:var(--green);border-color:var(--green)}
+.cl-cb svg{stroke:#fff;opacity:0;transition:opacity .15s}
+.cl-i.checked .cl-cb svg{opacity:1}
+.cl-it{flex:1}
+.cl-in{font-size:14px;transition:color .15s}
+.cl-i.checked .cl-in{color:var(--text3);text-decoration:line-through}
+.cl-nt{font-size:11px;color:var(--text3);margin-top:2px;line-height:1.3}
+.cl-pri{font-size:10px;font-weight:700;padding:2px 7px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;gap:3px}
+.cl-pri svg{width:10px;height:10px}
+.pri-hi{background:rgba(184,48,48,.1);color:var(--red)}.pri-hi svg{stroke:var(--red)}
+.pri-md{background:rgba(200,130,58,.12);color:var(--gold)}.pri-md svg{stroke:var(--gold)}
 </style>
 </head>
 <body>
-
 <div id="app">
   <!-- HEADER -->
-  <div class="app-header">
-    <div>
-      <div class="header-title">Camino <span>Català</span></div>
-      <div class="header-subtitle">Camí de Sant Jaume · 3 stages to Girona</div>
+  <div class="hdr">
+    <div class="hdr-l">
+      <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 8C28 8 10 26 10 50c0 15 7 28 19 36 3 2 7-1 6-5-4-7-5-15-3-22 4-11 13-17 18-17s14 6 18 17c2 7 1 15-3 22-1 4 3 7 6 5 12-8 19-21 19-36 0-24-18-42-40-42z" fill="#c8823a"/>
+        <path d="M50 44c-5 0-14 6-18 17 7-4 15-6 18-6s11 2 18 6c-4-11-13-17-18-17z" fill="#e8a85a"/>
+      </svg>
+      <div>
+        <div class="hdr-title">Camino <span>Català</span></div>
+        <div class="hdr-sub">Camí de Sant Jaume · 3 stages to Girona</div>
+      </div>
     </div>
-    <div class="header-badge">🐚 77.7 km</div>
+    <div class="hdr-badge">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M3 6l9-3 9 3M3 18l9 3 9-3"/></svg>
+      77.7 km
+    </div>
   </div>
 
   <!-- SCROLL AREA -->
-  <div id="scroll-area">
+  <div id="sa">
 
-    <!-- ════ PAGE: OVERVIEW ════ -->
+    <!-- PAGE: OVERVIEW -->
     <div class="page active" id="page-overview">
-
-      <div class="hero-overview">
-        <div class="hero-shell">🐚</div>
-        <div class="hero-ov-label">⭐ Generalitat de Catalunya · Official Route</div>
-        <div class="hero-ov-title">Three Stages<br>to Girona</div>
-        <div class="hero-ov-sub">From a cliffside monastery above the Mediterranean to the golden towers of Girona's old city.</div>
-        <div class="hero-stats">
-          <div class="h-stat"><div class="h-stat-v">77.7</div><div class="h-stat-l">km total</div></div>
-          <div class="h-stat"><div class="h-stat-v">3</div><div class="h-stat-l">stages</div></div>
-          <div class="h-stat"><div class="h-stat-v">521m</div><div class="h-stat-l">max altitude</div></div>
-          <div class="h-stat"><div class="h-stat-v">3–4</div><div class="h-stat-l">days</div></div>
+      <div class="hero">
+        <div class="hero-shell">
+          <svg viewBox="0 0 100 100" fill="none"><path d="M50 5C25 5 5 25 5 50c0 15 8 28 20 36 3 2 7-1 5-5-4-6-5-14-3-21 4-11 13-17 23-17s19 6 23 17c2 7 1 15-3 21-2 4 2 7 5 5 12-8 20-21 20-36C95 25 75 5 50 5z" fill="white"/></svg>
+        </div>
+        <div class="hero-lbl">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          Generalitat de Catalunya · Official Route
+        </div>
+        <div class="hero-h1">Three Stages<br>to Girona</div>
+        <div class="hero-sub">From a cliffside monastery above the Mediterranean to the golden towers of Girona.</div>
+        <div class="hstats">
+          <div><div class="hstat-v">77.7</div><div class="hstat-l">km total</div></div>
+          <div><div class="hstat-v">3</div><div class="hstat-l">stages</div></div>
+          <div><div class="hstat-v">521m</div><div class="hstat-l">max alt.</div></div>
+          <div><div class="hstat-v">3–4</div><div class="hstat-l">days</div></div>
         </div>
       </div>
 
-      <!-- Install banner -->
-      <div class="install-banner" id="install-banner">
-        <div class="ib-icon">📲</div>
-        <div class="ib-body" style="flex:1">
+      <div class="ib" id="ib">
+        <div class="ib-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+        <div style="flex:1">
           <h4>Add to Home Screen</h4>
-          <p>Install this app on your iPhone for offline use — works without internet on the trail!</p>
+          <p>Open in Safari, tap Share, then "Add to Home Screen" for offline use on trail!</p>
           <div class="ib-steps">
-            <div class="ib-step"><div class="ib-step-num">1</div>Tap the Share button in Safari</div>
-            <div class="ib-step"><div class="ib-step-num">2</div>Scroll down → "Add to Home Screen"</div>
-            <div class="ib-step"><div class="ib-step-num">3</div>Tap "Add" — done! 🎉</div>
+            <div class="ib-step"><div class="ib-sn">1</div>Open this file in Safari on iPhone</div>
+            <div class="ib-step"><div class="ib-sn">2</div>Tap the Share button at the bottom</div>
+            <div class="ib-step"><div class="ib-sn">3</div>Tap "Add to Home Screen" then Add</div>
           </div>
         </div>
-        <button class="ib-dismiss" onclick="document.getElementById('install-banner').style.display='none'">✕</button>
+        <button class="ib-x" onclick="document.getElementById('ib').style.display='none'">✕</button>
       </div>
 
-      <!-- Progress -->
-      <div class="section-title">Your progress</div>
-      <div class="progress-card">
-        <div class="prog-row">
-          <span class="prog-label">Sant Pere de Rodes → Girona</span>
-          <span class="prog-pct" id="prog-pct">0%</span>
-        </div>
-        <div class="prog-track">
-          <div class="prog-fill" id="prog-fill" style="width:0%;background:linear-gradient(90deg,var(--s1),var(--gold2))"></div>
-        </div>
-        <div class="prog-stages">
-          <div class="ps"><div class="ps-dot" id="ps1" style="background:var(--bg2);border:2px solid var(--s1)"></div><span>Stage 1</span></div>
-          <div class="ps"><div class="ps-dot" id="ps2" style="background:var(--bg2);border:2px solid var(--border)"></div><span>Stage 2</span></div>
-          <div class="ps"><div class="ps-dot" id="ps3" style="background:var(--bg2);border:2px solid var(--border)"></div><span>Girona</span></div>
-        </div>
+      <div class="st" style="margin-top:20px">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg>
+        Your progress
       </div>
-
-      <!-- Stage cards -->
-      <div class="section-title">Stages</div>
-
-      <div class="stage-card" onclick="openStage(1)">
-        <div class="sc-header">
-          <div class="sc-num" style="background:var(--s1)">1</div>
-          <div class="sc-body">
-            <h3>Sant Pere de Rodes → Figueres</h3>
-            <p>Steep descent from a sea-cliff monastery · Dalí's city</p>
-            <div class="sc-chips">
-              <span class="sc-chip">25.3 km</span>
-              <span class="sc-chip">↓ 720 m</span>
-              <span class="sc-chip">7–9 h</span>
-              <span class="sc-chip">Medium</span>
-            </div>
-          </div>
+      <div class="prog-c">
+        <div class="prog-r">
+          <span class="prog-lbl"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M3 6l9-3 9 3M3 18l9 3 9-3"/></svg>Sant Pere de Rodes → Girona</span>
+          <span id="ppct" style="font-size:13px;color:var(--text3)">0%</span>
         </div>
-        <div class="sc-footer">
-          <div class="sc-footer-stat"><div class="v" style="color:var(--s1)">521m</div><div class="l">max alt.</div></div>
-          <div class="sc-footer-stat"><div class="v">25.3km</div><div class="l">distance</div></div>
-          <div class="sc-footer-stat"><div class="v">8</div><div class="l">waypoints</div></div>
-          <div class="sc-arrow">›</div>
+        <div class="prog-t"><div class="prog-f" id="pfill" style="width:0%;background:linear-gradient(90deg,var(--s1),var(--gold2))"></div></div>
+        <div class="prog-ss">
+          <div class="ps"><div class="psd" style="background:var(--bg2);border:2px solid var(--s1)"></div>Stage 1</div>
+          <div class="ps"><div class="psd" style="background:var(--bg2);border:2px solid var(--border)"></div>Stage 2</div>
+          <div class="ps"><div class="psd" style="background:var(--bg2);border:2px solid var(--border)"></div>Girona</div>
         </div>
       </div>
 
+      <div class="st">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+        Stages
+      </div>
+
+      <div class="sc" onclick="openStage(1)">
+        <div class="sc-h"><div class="sc-n" style="background:var(--s1)">1</div><div class="sc-b"><h3>Sant Pere de Rodes → Figueres</h3><p>Steep descent from sea-cliff monastery · Dalí's city</p><div class="chips"><span class="chip">25.3 km</span><span class="chip">↓ 720m</span><span class="chip">7–9h</span><span class="chip">Medium</span></div></div></div>
+        <div class="sc-f"><div class="sc-s"><div class="v" style="color:var(--s1)">521m</div><div class="l">max alt.</div></div><div class="sc-s"><div class="v">25.3km</div><div class="l">distance</div></div><div class="sc-s"><div class="v">8</div><div class="l">waypoints</div></div><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text3)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9,18 15,12 9,6"/></svg></div>
+      </div>
       <div style="height:10px"></div>
-
-      <div class="stage-card" onclick="openStage(2)">
-        <div class="sc-header">
-          <div class="sc-num" style="background:var(--s2)">2</div>
-          <div class="sc-body">
-            <h3>Figueres → Bàscara</h3>
-            <p>Easy recovery walk · Empordà wheat fields · walled village</p>
-            <div class="sc-chips">
-              <span class="sc-chip">17.7 km</span>
-              <span class="sc-chip">↑ 140 m</span>
-              <span class="sc-chip">4–5 h</span>
-              <span class="sc-chip">Easy</span>
-            </div>
-          </div>
-        </div>
-        <div class="sc-footer">
-          <div class="sc-footer-stat"><div class="v" style="color:var(--s2)">75m</div><div class="l">max alt.</div></div>
-          <div class="sc-footer-stat"><div class="v">17.7km</div><div class="l">distance</div></div>
-          <div class="sc-footer-stat"><div class="v">6</div><div class="l">waypoints</div></div>
-          <div class="sc-arrow">›</div>
-        </div>
+      <div class="sc" onclick="openStage(2)">
+        <div class="sc-h"><div class="sc-n" style="background:var(--s2)">2</div><div class="sc-b"><h3>Figueres → Bàscara</h3><p>Easy recovery · Empordà wheat fields · walled village</p><div class="chips"><span class="chip">17.7 km</span><span class="chip">↑ 140m</span><span class="chip">4–5h</span><span class="chip">Easy</span></div></div></div>
+        <div class="sc-f"><div class="sc-s"><div class="v" style="color:var(--s2)">75m</div><div class="l">max alt.</div></div><div class="sc-s"><div class="v">17.7km</div><div class="l">distance</div></div><div class="sc-s"><div class="v">6</div><div class="l">waypoints</div></div><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text3)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9,18 15,12 9,6"/></svg></div>
       </div>
-
       <div style="height:10px"></div>
-
-      <div class="stage-card" onclick="openStage(3)">
-        <div class="sc-header">
-          <div class="sc-num" style="background:var(--s3)">3</div>
-          <div class="sc-body">
-            <h3>Bàscara → Girona</h3>
-            <p>Forest, farmland & River Ter · two variants · historic city arrival</p>
-            <div class="sc-chips">
-              <span class="sc-chip">34.7 km</span>
-              <span class="sc-chip">↑ 280 m</span>
-              <span class="sc-chip">8–10 h</span>
-              <span class="sc-chip">Med–Hard</span>
-            </div>
-          </div>
-        </div>
-        <div class="sc-footer">
-          <div class="sc-footer-stat"><div class="v" style="color:var(--s3)">110m</div><div class="l">max alt.</div></div>
-          <div class="sc-footer-stat"><div class="v">34.7km</div><div class="l">distance</div></div>
-          <div class="sc-footer-stat"><div class="v">9</div><div class="l">waypoints</div></div>
-          <div class="sc-arrow">›</div>
-        </div>
+      <div class="sc" onclick="openStage(3)">
+        <div class="sc-h"><div class="sc-n" style="background:var(--s3)">3</div><div class="sc-b"><h3>Bàscara → Girona</h3><p>Forest, farmland &amp; River Ter · two variants · historic city</p><div class="chips"><span class="chip">34.7 km</span><span class="chip">↑ 280m</span><span class="chip">8–10h</span><span class="chip">Med–Hard</span></div></div></div>
+        <div class="sc-f"><div class="sc-s"><div class="v" style="color:var(--s3)">110m</div><div class="l">max alt.</div></div><div class="sc-s"><div class="v">34.7km</div><div class="l">distance</div></div><div class="sc-s"><div class="v">9</div><div class="l">waypoints</div></div><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text3)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9,18 15,12 9,6"/></svg></div>
       </div>
-
       <div style="height:16px"></div>
     </div>
 
-    <!-- ════ PAGE: STAGES ════ -->
+    <!-- PAGE: STAGES -->
     <div class="page" id="page-stages">
-      <div class="stage-picker">
-        <button class="sp-btn active" id="spb1" onclick="switchStage(1)">
-          <span class="sp-dot" style="background:var(--s1)"></span>Stage 1
-        </button>
-        <button class="sp-btn" id="spb2" onclick="switchStage(2)">
-          <span class="sp-dot" style="background:var(--s2)"></span>Stage 2
-        </button>
-        <button class="sp-btn" id="spb3" onclick="switchStage(3)">
-          <span class="sp-dot" style="background:var(--s3)"></span>Stage 3
-        </button>
+      <div class="spk">
+        <button class="spb active" id="spb1" onclick="switchStage(1)"><span class="sp-dot" style="background:var(--s1)"></span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--text2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="3,11 22,2 13,21 11,13"/></svg>Stage 1</button>
+        <button class="spb" id="spb2" onclick="switchStage(2)"><span class="sp-dot" style="background:var(--s2)"></span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--text2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="3,11 22,2 13,21 11,13"/></svg>Stage 2</button>
+        <button class="spb" id="spb3" onclick="switchStage(3)"><span class="sp-dot" style="background:var(--s3)"></span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--text2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="3,11 22,2 13,21 11,13"/></svg>Stage 3</button>
       </div>
-
-      <div id="stage-detail-area"></div>
+      <div id="sda"></div>
     </div>
 
-    <!-- ════ PAGE: WEATHER ════ -->
+    <!-- PAGE: WEATHER -->
     <div class="page" id="page-weather">
-
-      <div class="wind-card" style="margin-top:16px">
-        <div class="wind-icon">💨</div>
-        <div class="wind-body">
-          <h4>Tramuntana Wind Warning</h4>
-          <p>The Alt Empordà is famous for the <strong>tramuntana</strong> — a cold, powerful north wind that can blow at 80–100 km/h. It can appear suddenly, especially in autumn and winter. It's beautiful and brutal in equal measure.</p>
+      <div class="wind">
+        <div class="wind-iw"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/></svg></div>
+        <div class="wind-b"><h4>Tramuntana Wind Warning</h4><p>The Alt Empordà is famous for the <strong>tramuntana</strong> — a cold, powerful north wind up to 100 km/h. It can arrive suddenly, especially autumn and winter. Beautiful and brutal.</p></div>
+      </div>
+      <div class="st"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>Best seasons</div>
+      <div class="sgrid">
+        <div class="scard best">
+          <div class="s-iw"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v1M12 21v1M4.22 4.22l.71.71M18.36 18.36l.71.71M2 12h1M21 12h1M4.22 19.78l.71-.71M18.36 5.64l.71-.71"/><circle cx="12" cy="12" r="4"/></svg></div>
+          <div class="s-badge"><svg width="9" height="9" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>BEST</div>
+          <div class="s-name">Spring (Apr–May)</div>
+          <div class="s-stars" id="ss1"></div>
+          <div class="s-desc">Perfect 16–22°C. Wildflowers on Cap de Creus. Green fields. Best light for the monastery.</div>
+        </div>
+        <div class="scard best">
+          <div class="s-iw"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 18a5 5 0 0 0-10 0"/><line x1="12" y1="9" x2="12" y2="2"/><line x1="4.22" y1="10.22" x2="5.64" y2="11.64"/><line x1="1" y1="18" x2="3" y2="18"/><line x1="21" y1="18" x2="23" y2="18"/><line x1="18.36" y1="11.64" x2="19.78" y2="10.22"/></svg></div>
+          <div class="s-badge"><svg width="9" height="9" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>BEST</div>
+          <div class="s-name">Autumn (Sep–Oct)</div>
+          <div class="s-stars" id="ss2"></div>
+          <div class="s-desc">Golden light, harvest season. 18–24°C. Tramuntana risk grows in October. Ideal overall.</div>
+        </div>
+        <div class="scard">
+          <div class="s-iw"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></div>
+          <div class="s-name">Summer (Jun–Aug)</div>
+          <div class="s-stars" id="ss3"></div>
+          <div class="s-desc">Very hot 28–35°C. Start at 6am. Extra water. Dalí Museum packed.</div>
+        </div>
+        <div class="scard">
+          <div class="s-iw"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 17.58A5 5 0 0 0 18 8h-1.26A8 8 0 1 0 4 16.25"/><line x1="8" y1="16" x2="8.01" y2="16"/><line x1="8" y1="20" x2="8.01" y2="20"/><line x1="12" y1="18" x2="12.01" y2="18"/><line x1="12" y1="22" x2="12.01" y2="22"/><line x1="16" y1="16" x2="16.01" y2="16"/><line x1="16" y1="20" x2="16.01" y2="20"/></svg></div>
+          <div class="s-name">Winter (Nov–Mar)</div>
+          <div class="s-stars" id="ss4"></div>
+          <div class="s-desc">Cold 5–12°C. Strong tramuntana likely. Some services closed. Beautiful solitude.</div>
         </div>
       </div>
-
-      <div class="section-title">Best seasons to walk</div>
-      <div class="season-grid">
-        <div class="season-card best">
-          <div class="season-icon">🌸</div>
-          <div class="best-badge">BEST</div>
-          <div class="season-name">Spring (Apr–May)</div>
-          <div class="season-rating"><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span></div>
-          <div class="season-desc">Perfect temperatures 16–22°C. Wildflowers on the Cap de Creus. Green fields. Best light for the monastery. Some rain possible.</div>
-        </div>
-        <div class="season-card best">
-          <div class="season-icon">🍂</div>
-          <div class="best-badge">BEST</div>
-          <div class="season-name">Autumn (Sep–Oct)</div>
-          <div class="season-rating"><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span></div>
-          <div class="season-desc">Golden light, harvest season, fewer tourists. Temperatures 18–24°C. Tramuntana risk increases in October. Ideal overall.</div>
-        </div>
-        <div class="season-card">
-          <div class="season-icon">☀️</div>
-          <div class="season-name">Summer (Jun–Aug)</div>
-          <div class="season-rating"><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span></div>
-          <div class="season-desc">Very hot 28–35°C. Exposed descents brutal in midday sun. Start walking by 6am. Carry extra water. Dalí Museum very crowded.</div>
-        </div>
-        <div class="season-card">
-          <div class="season-icon">❄️</div>
-          <div class="season-name">Winter (Nov–Mar)</div>
-          <div class="season-rating"><span class="star">⭐</span><span class="star">⭐</span></div>
-          <div class="season-desc">Very few pilgrims. Cold 5–12°C. Strong tramuntana likely. Some services closed. Beautiful solitude but challenging logistics.</div>
-        </div>
-      </div>
-
-      <div class="section-title">Monthly temperature guide</div>
-      <div class="temp-chart">
-        <div id="temp-rows"></div>
-      </div>
-
-      <div class="section-title">Packing by weather</div>
-      <div class="tips-list">
-        <div class="tip-item"><div class="tip-em">👟</div><div class="tip-text"><strong>Footwear</strong>Trail running shoes work great on this route — lighter than heavy boots. The descent to Pau is the only truly technical section. Waterproof recommended Oct–Apr.</div></div>
-        <div class="tip-item"><div class="tip-em">🧴</div><div class="tip-text"><strong>Sun protection (critical in summer)</strong>SPF 50 sunscreen, sun hat with neck cover, and sunglasses are non-negotiable Jun–Sep. The descent to Pau is completely exposed.</div></div>
-        <div class="tip-item"><div class="tip-em">🌬️</div><div class="tip-text"><strong>Windproof layer</strong>Always carry a light windproof jacket. The tramuntana arrives without warning and can drop the felt temperature by 10°C instantly.</div></div>
-        <div class="tip-item"><div class="tip-em">💧</div><div class="tip-text"><strong>Hydration</strong>Minimum 2L capacity from the monastery to Vilajuïga (15 km, no water). In summer, carry 3L. Electrolyte tablets recommended.</div></div>
-      </div>
-
+      <div class="st"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Monthly temperatures</div>
+      <div class="tc" id="tc"></div>
+      <div class="st"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Packing tips</div>
+      <div class="tpl" id="wtips"></div>
       <div style="height:16px"></div>
     </div>
 
-    <!-- ════ PAGE: TRANSPORT ════ -->
+    <!-- PAGE: TRANSPORT -->
     <div class="page" id="page-transport">
-
-      <div class="section-title" style="margin-top:16px">Getting to the start</div>
-      <div class="transport-section">
-        <div class="transport-route">
-          <div class="tr-header">
-            <div class="tr-icon">🚂</div>
-            <div><div class="tr-title">Train to El Port de la Selva area</div><div class="tr-sub">R11 Rodalies + bus or taxi</div></div>
-          </div>
-          <div class="tr-row">
-            <div><div class="tr-from-to">Barcelona → Llançà</div><div class="tr-detail">R11 Rodalies · ~2h · change at Figueres</div></div>
-            <a class="tr-link" href="https://www.renfe.com" target="_blank">Renfe</a>
-          </div>
-          <div class="tr-row">
-            <div><div class="tr-from-to">Llançà → Port de la Selva</div><div class="tr-detail">Taxi ~€15 · or SARFA bus (seasonal)</div></div>
-            <a class="tr-link" href="https://teisa-bus.com" target="_blank">SARFA</a>
-          </div>
-          <div class="tr-row">
-            <div><div class="tr-from-to">Port de la Selva → Monastery</div><div class="tr-detail">Taxi +34 972 387 111 · or walk GR-92 (2h)</div></div>
-            <a class="tr-link" href="tel:+34972387111">Call</a>
-          </div>
-        </div>
-
-        <div class="transport-route">
-          <div class="tr-header">
-            <div class="tr-icon">✈️</div>
-            <div><div class="tr-title">From Madrid</div><div class="tr-sub">Flight + train or direct bus</div></div>
-          </div>
-          <div class="tr-row">
-            <div><div class="tr-from-to">Madrid → Barcelona (AVE)</div><div class="tr-detail">~2h45 · then R11 to Figueres/Llançà</div></div>
-            <a class="tr-link" href="https://www.renfe.com" target="_blank">Renfe</a>
-          </div>
-          <div class="tr-row">
-            <div><div class="tr-from-to">Madrid → Figueres (direct AVE)</div><div class="tr-detail">~3h · Figueres-Vilafant AVE station</div></div>
-            <a class="tr-link" href="https://www.renfe.com" target="_blank">Book</a>
-          </div>
-        </div>
+      <div class="st" style="margin-top:16px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16,8 20,8 23,11 23,16 16,16"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Getting to the start</div>
+      <div style="padding:0 16px" id="t-start"></div>
+      <div class="st"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M3 6l9-3 9 3M3 18l9 3 9-3"/></svg>Between stages</div>
+      <div style="padding:0 16px" id="t-between"></div>
+      <div class="st"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4a2 2 0 0 1 2-2.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Emergency numbers</div>
+      <div class="em-c">
+        <div class="em-t"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Emergency contacts</div>
+        <div class="em-r"><span>European emergency</span><span class="em-n">112</span></div>
+        <div class="em-r"><span>Spanish police (Mossos)</span><span class="em-n">088</span></div>
+        <div class="em-r"><span>Medical emergency</span><span class="em-n">061</span></div>
+        <div class="em-r"><span>Taxi Port de la Selva</span><a class="em-n" href="tel:+34972387111">972 387 111</a></div>
+        <div class="em-r"><span>Taxi Figueres</span><a class="em-n" href="tel:+34972500555">972 500 555</a></div>
       </div>
-
-      <div class="section-title">Between stages</div>
-      <div class="transport-section">
-        <div class="transport-route">
-          <div class="tr-header">
-            <div class="tr-icon">🚆</div>
-            <div><div class="tr-title">R11 Rodalies — Key stops</div><div class="tr-sub">Portbou ↔ Barcelona Sants</div></div>
-          </div>
-          <div class="tr-row">
-            <div><div class="tr-from-to">Vilajuïga ↔ Figueres</div><div class="tr-detail">~8 min · several daily · skip Stage 1 second half</div></div>
-            <a class="tr-link" href="https://www.rodalies.gencat.cat" target="_blank">Times</a>
-          </div>
-          <div class="tr-row">
-            <div><div class="tr-from-to">Figueres ↔ Girona</div><div class="tr-detail">~35 min · skip stages 2+3</div></div>
-            <a class="tr-link" href="https://www.rodalies.gencat.cat" target="_blank">Times</a>
-          </div>
-          <div class="tr-row">
-            <div><div class="tr-from-to">Medinyà → Girona (bus)</div><div class="tr-detail">Saves ~11 km of Stage 3 urban walking</div></div>
-            <a class="tr-link" href="https://www.moovitapp.com" target="_blank">Moovit</a>
-          </div>
-        </div>
-
-        <div class="transport-route">
-          <div class="tr-header">
-            <div class="tr-icon">🚌</div>
-            <div><div class="tr-title">Regional buses</div><div class="tr-sub">TEISA / SARFA</div></div>
-          </div>
-          <div class="tr-row">
-            <div><div class="tr-from-to">Figueres ↔ Port de la Selva</div><div class="tr-detail">Seasonal (summer). Check timetable.</div></div>
-            <a class="tr-link" href="https://teisa-bus.com" target="_blank">TEISA</a>
-          </div>
-          <div class="tr-row">
-            <div><div class="tr-from-to">Figueres ↔ La Jonquera</div><div class="tr-detail">For Coll de Panissars alternative start</div></div>
-            <a class="tr-link" href="https://teisa-bus.com" target="_blank">TEISA</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="section-title">Emergency & useful numbers</div>
-      <div class="emergency-card">
-        <div class="ec-title">📞 Emergency contacts</div>
-        <div class="ec-row"><span>European emergency</span><span class="ec-num">112</span></div>
-        <div class="ec-row"><span>Spanish police (Mossos)</span><span class="ec-num">088</span></div>
-        <div class="ec-row"><span>Medical emergency</span><span class="ec-num">061</span></div>
-        <div class="ec-row"><span>Taxi Port de la Selva</span><a class="ec-num" href="tel:+34972387111" style="color:var(--teal)">972 387 111</a></div>
-        <div class="ec-row"><span>Taxi Figueres</span><a class="ec-num" href="tel:+34972500555" style="color:var(--teal)">972 500 555</a></div>
-        <div class="ec-row"><span>Tourism Figueres</span><a class="ec-num" href="tel:+34972503155" style="color:var(--teal)">972 503 155</a></div>
-      </div>
-
       <div style="height:16px"></div>
     </div>
 
-    <!-- ════ PAGE: CHECKLIST ════ -->
+    <!-- PAGE: CHECKLIST -->
     <div class="page" id="page-checklist">
-
-      <div style="padding:16px 16px 0">
-        <div class="checklist-progress">
-          <div class="cl-prog-header">
-            <span class="cl-prog-title">Packing checklist</span>
-            <span class="cl-prog-count" id="cl-count">0 / 0 packed</span>
-          </div>
-          <div class="cl-prog-track">
-            <div class="cl-prog-fill" id="cl-fill" style="width:0%"></div>
-          </div>
-          <button class="cl-reset-btn" onclick="resetChecklist()">Reset all</button>
+      <div class="cl-prog">
+        <div class="cl-ph">
+          <span class="cl-pt"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9,11 12,14 22,4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Packing checklist</span>
+          <span class="cl-pc" id="clcnt">0 / 0 packed</span>
         </div>
+        <div class="cl-t"><div class="cl-f" id="clf" style="width:0%"></div></div>
+        <button class="cl-rst" onclick="resetCL()"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,4 1,10 7,10"/><path d="M3.51 15a9 9 0 1 0 .49-3.64"/></svg>Reset all</button>
       </div>
-
-      <div id="checklist-area"></div>
+      <div id="cla"></div>
       <div style="height:16px"></div>
     </div>
+  </div>
 
-  </div><!-- /scroll-area -->
-
-  <!-- BOTTOM TAB BAR -->
-  <div class="tab-bar">
-    <button class="tab-btn active" data-page="overview" onclick="showPage('overview', this)">
-      <span class="tab-icon">🗺️</span>
-      <span class="tab-label">Overview</span>
+  <!-- TAB BAR -->
+  <div class="tabs">
+    <button class="tb active" onclick="showPage('overview',this)">
+      <div class="tb-iw"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg></div>
+      <span class="tb-l">Overview</span>
     </button>
-    <button class="tab-btn" data-page="stages" onclick="showPage('stages', this)">
-      <span class="tab-icon">🥾</span>
-      <span class="tab-label">Stages</span>
+    <button class="tb" onclick="showPage('stages',this)">
+      <div class="tb-iw"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3,11 22,2 13,21 11,13"/></svg></div>
+      <span class="tb-l">Stages</span>
     </button>
-    <button class="tab-btn" data-page="weather" onclick="showPage('weather', this)">
-      <span class="tab-icon">🌤️</span>
-      <span class="tab-label">Weather</span>
+    <button class="tb" onclick="showPage('weather',this)">
+      <div class="tb-iw"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 0 1 0 9z"/></svg></div>
+      <span class="tb-l">Weather</span>
     </button>
-    <button class="tab-btn" data-page="transport" onclick="showPage('transport', this)">
-      <span class="tab-icon">🚆</span>
-      <span class="tab-label">Transport</span>
+    <button class="tb" onclick="showPage('transport',this)">
+      <div class="tb-iw"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/><path d="M8 6h8"/><path d="M8 10h8"/></svg></div>
+      <span class="tb-l">Transport</span>
     </button>
-    <button class="tab-btn" data-page="checklist" onclick="showPage('checklist', this)">
-      <span class="tab-icon">✅</span>
-      <span class="tab-label">Packing</span>
+    <button class="tb" onclick="showPage('checklist',this)">
+      <div class="tb-iw"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9,11 12,14 22,4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+      <span class="tb-l">Packing</span>
     </button>
   </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
-// ═══════════════════════════════════════
-// DATA
-// ═══════════════════════════════════════
-
-const STAGES = {
-  1: {
-    color: '#c8823a', km: '25.3', title: 'Sant Pere de Rodes → Figueres',
-    desc: 'The most dramatic stage. A steep technical descent from a cliffside Romanesque monastery through wild scrubland to Pau, then flat Empordà farmland to Dalí\'s city.',
-    chips: ['25.3 km','↑ 180m','↓ 720m','7–9h','Medium'],
-    chartLabels: ['0km','2km','5km','10km','15km','17km','21km','23.6km','25.3km'],
-    chartData: [521,320,200,90,33,28,42,35,30],
-    accommodations: [
-      { name:'Pensió Bartis', price:'~€35/night', desc:'Basic pilgrim pension near Figueres train station. Clean and well-located.', link:'https://www.booking.com/city/es/figueres.html', linkText:'Search Figueres' },
-      { name:'Hotel Duran', price:'~€70/night', desc:'Historic 1887 hotel in central Figueres with traditional Catalan restaurant.', link:'https://www.hotelduran.com', linkText:'hotelduran.com' },
-      { name:'Pre-stage: Port de la Selva', price:'from €40', desc:'Stay here the night before the stage. Hotel Gran Sol, Pensió Xavi.', link:'https://www.portdelaselva.cat', linkText:'Tourist info' },
-    ],
-    tips: [
-      { em:'💧', title:'No water for 15 km', text:'From the monastery to Vilajuïga there are zero water points. Carry at least 2 litres. First bar is in Vilajuïga (~km 15).' },
-      { em:'⚠️', title:'Technical descent to Pau', text:'The trail to Pau is a steep goat path (-430m in ~8km). Trekking poles strongly recommended. Road alternative: GIP-6041 to Vilajuïga.' },
-      { em:'🗺️', title:'Poor signage after Vilajuïga', text:'Only official Generalitat markers exist, no yellow arrows. Use Wikiloc track or GPS app — many unsigned agricultural crossings.' },
-      { em:'🎨', title:'Book Dalí Museum early', text:'The Teatre-Museu Dalí is one of the most visited museums in Spain. Advance online booking is essential, especially in summer.' },
-    ],
-    waypoints: [
-      { km:'0', name:'Sant Pere de Rodes', alt:'521m', tags:['c','w'], detail:{ desc:'Start. 10th-c Romanesque monastery, BCIN. Get your first credencial stamp here.', access:'Car (parking) or GR-92 from Port de la Selva (2h)', water:'Vending machine at entrance', sleep:'Hotel Gran Sol / Pensió Xavi (Port de la Selva)', link:'https://portdelaselva.cat', ll:'Monastery info' }},
-      { km:'2', name:'Ermita de Santa Helena', alt:'320m', tags:['c'], detail:{ desc:'Pre-Romanesque ruins, 9th century. First official yellow arrow of the route appears here.', access:'Trail from monastery (~40 min)', water:'None — carry from monastery', sleep:'None — continue to Pau', link:'https://www.cap-de-creus.cat', ll:'Cap de Creus Park' }},
-      { km:'~10', name:'Pau', alt:'90m', tags:['f'], detail:{ desc:'Medieval village with Romanesque church. Restaurant opens ~1pm only. End of the steep technical descent.', access:'Goat path from Creu Blanca (2km) OR GIP-6041 road', water:'Bar/restaurant (afternoon hours only)', sleep:'None — Vilajuïga 5km ahead', link:'', ll:'' }},
-      { km:'~15', name:'Vilajuïga', alt:'33m', tags:['w','f','t'], detail:{ desc:'First town with full services. R11 train station. Bars, small supermarket. Alternative start point.', access:'R11 train from Figueres (~8 min)', water:'Bars, supermarket', sleep:'Pensió Xavi (verify availability)', link:'https://www.renfe.com', ll:'R11 trains' }},
-      { km:'~18', name:'Pedret i Marzà', alt:'29m', tags:['c'], detail:{ desc:'Church of Pedret worth a quick visit. Attention at Marzà crossing — stay on correct riverbank.', access:'Paved farm tracks from Vilajuïga', water:'None — carry from Vilajuïga', sleep:'None', link:'', ll:'' }},
-      { km:'~21', name:'Peralada', alt:'42m', tags:['w','f','s','c'], detail:{ desc:'Medieval walled town, spectacular castle (wines, casino). Good services. Get a stamp here.', access:'Farm tracks from Marzà past the castle', water:'Several bars and restaurants', sleep:'Can Maret ~€45 (1km off route)', link:'https://www.castellperalada.com', ll:'Castell Peralada' }},
-      { km:'23.6', name:'Vilabertran', alt:'35m', tags:['w','c'], detail:{ desc:'Romanesque collegiate church of Santa Maria (11th c) — National Monument. Last bar before Figueres.', access:'Asphalt road from Peralada', water:'Bar in village', sleep:'None — Figueres 1.7km ahead', link:'', ll:'' }},
-      { km:'25.3', name:'Figueres ✓', alt:'30m', tags:['w','f','s','c','t'], detail:{ desc:'End of Stage 1. Birthplace of Dalí. Dalí Theatre-Museum (book ahead). Castell de Sant Ferran (free, 1km).', access:'Train (AVE, R11) · Bus (national & international)', water:'Full city services', sleep:'Pensió Bartis ~€35 · Hotel Duran ~€70', link:'https://www.visitfigueres.cat', ll:'Figueres tourism' }},
-    ]
-  },
-  2: {
-    color: '#2a6a6a', km: '17.7', title: 'Figueres → Bàscara',
-    desc: 'The shortest stage — a gentle recovery walk across the Empordà plain. Leave late, visit the Dalí Museum in the morning. Wheat fields, small villages, and arrive at a beautiful walled town.',
-    chips: ['17.7 km','↑ 140m','↓ 120m','4–5h','Easy'],
-    chartLabels: ['0km','4km','7km','9km','13km','17.7km'],
-    chartData: [30,45,50,55,65,75],
-    accommodations: [
-      { name:'Hostal Fluvià', price:'~€31/night', desc:'The only option in Bàscara. Family-run, central, pilgrim-friendly. The classic choice.', link:'', linkText:'' },
-      { name:'Castle Hotel Orriols', price:'~€90+/night', desc:'4-star hotel in a castle right on the Camino at Orriols (~km 21 from Figueres). A splurge but unforgettable.', link:'', linkText:'' },
-      { name:'Mas Alba Terradelles', price:'B&B rate', desc:'Agrotourism goat cheese farm ~2.7km off route past Orriols. Book ahead.', link:'', linkText:'' },
-    ],
-    tips: [
-      { em:'⏰', title:'Leave Figueres late', text:'Only 4–5 hours of walking. Use the morning to visit the Dalí Museum or Castell de Sant Ferran before setting out.' },
-      { em:'🌾', title:'Mostly paved farm roads', text:'The terrain between Figueres and Bàscara is largely flat paved lanes and minor roads. Comfortable but not wilderness walking.' },
-      { em:'☕', title:'Services in each village', text:'Santa Llogaia, Borrassà, Creixell, Pontós all have bars. Borrassà\'s Civic Centre bar is open even on Sunday mornings!' },
-      { em:'🗺️', title:'Good yellow arrows here', text:'From Figueres onward the Girona Camino Association has excellent yellow arrow marking. Exit via Carrer San Pau.' },
-    ],
-    waypoints: [
-      { km:'0', name:'Figueres — Start', alt:'30m', tags:['w','f','s','t'], detail:{ desc:'Exit via Carrer San Pau. Follow ground markers right side. Good yellow arrows throughout.', access:'Train station (R11, AVE) · bus station', water:'Full city services', sleep:'Pensió Bartis · Hotel Duran', link:'https://www.visitfigueres.cat', ll:'Figueres tourism' }},
-      { km:'~4', name:'Santa Llogaia d\'Àlguema', alt:'45m', tags:['f'], detail:{ desc:'First village after Figueres. Turn right at the entrance onto a dirt track through cereal fields, crossing the motorway.', access:'Wide pavement from Figueres, ~45 min', water:'Bar', sleep:'None', link:'', ll:'' }},
-      { km:'~7', name:'Borrassà', alt:'50m', tags:['w','f'], detail:{ desc:'Cross the motorway bridge and enter town. The Civic Centre bar is famously open even Sunday mornings. Good stamp point.', access:'Dirt track from Santa Llogaia crossing motorway bridge', water:'Civic Centre bar (incl. Sundays!)', sleep:'None', link:'', ll:'' }},
-      { km:'~9', name:'Creixell', alt:'55m', tags:['f'], detail:{ desc:'Small village, bar available. The route turns sharply RIGHT at the church, then right again 100m later. Watch the arrows carefully.', access:'Farm tracks from Borrassà', water:'Bar', sleep:'None', link:'', ll:'' }},
-      { km:'~13', name:'Pontós', alt:'65m', tags:['c','f'], detail:{ desc:'Pass church and old convent (now holiday camp). Ermita de Santa Anna (15th century) nearby. Ruins of Castell de Pontós visible.', access:'Track near N-II then farm paths', water:'Bar', sleep:'None', link:'', ll:'' }},
-      { km:'17.7', name:'Bàscara ✓', alt:'75m', tags:['w','f','s'], detail:{ desc:'Arrive via the Portal de Girona arch. Medieval walled town. Info board shows 2 variants for Stage 3. Hostal Fluvià is the only accommodation.', access:'Farm road from Pontós', water:'Hostal Fluvià, village bar', sleep:'Hostal Fluvià ~€31 (only option)', link:'https://www.gronze.com', ll:'Gronze pilgrim info' }},
-    ]
-  },
-  3: {
-    color: '#7a3a8a', km: '34.7', title: 'Bàscara → Girona',
-    desc: 'The longest and most rewarding stage. Choose between two scenic variants through forests and farms, converge at the River Ter, then follow it all the way into the golden old city of Girona.',
-    chips: ['34.7 km','↑ 280m','↓ 285m','8–10h','Med–Hard'],
-    chartLabels: ['0km','4km','7km','11km','21km','24km','28km','31km','34.7km'],
-    chartData: [75,110,90,95,70,65,65,70,75],
-    accommodations: [
-      { name:'Alberg Girona Xanascat', price:'~€18.90/night', desc:'Official pilgrim hostel with breakfast. Pilgrim discount with credencial. Best value in Girona.', link:'https://xanascat.cat', linkText:'xanascat.cat' },
-      { name:'Hotel Llegendes de Girona', price:'boutique rate', desc:'Inside the old city walls. Atmospheric stone building steps from the cathedral. A treat.', link:'https://www.booking.com/city/es/gerona.html', linkText:'Search Girona' },
-      { name:'Equity Point Hostel', price:'~€25+/night', desc:'Social hostel near the train station. Popular with pilgrims and backpackers.', link:'https://www.booking.com/city/es/gerona.html', linkText:'Search Girona' },
-    ],
-    tips: [
-      { em:'📏', title:'Start by 7:30 AM', text:'At 34.7 km this is a big day. Leave Bàscara early. Alternatively, split by staying in Cervià de Ter (~km 21 from Bàscara).' },
-      { em:'🌲', title:'Beautiful rural first half', text:'The first 20 km are quiet — wheat fields, scrub oak forest, small farms. Almost all off-road with plenty of shade and Pyrenean views.' },
-      { em:'🚌', title:'Bus option from Medinyà', text:'Many pilgrims walk to Medinyà (~km 24) then take a bus to Girona. Saves ~11 km of urban walking. Perfectly valid!' },
-      { em:'🍽️', title:'Eat at Medinyà', text:'Snack Bar Medinyà has a menú del día for ~€11. Restaurant El Caliu ~€23. Both near the route junction where the two variants merge.' },
-    ],
-    waypoints: [
-      { km:'0', name:'Bàscara — Start', alt:'75m', tags:['w','f','s'], detail:{ desc:'Exit through the Portal de Girona. Info board shows both variant routes (Viladasens or Vilademuls). Pick your adventure!', access:'End of Stage 2', water:'Bar in village', sleep:'Hostal Fluvià ~€31', link:'', ll:'' }},
-      { km:'~4', name:'Orriols (Variant A)', alt:'110m', tags:['s','c'], detail:{ desc:'Well-preserved village with a castle converted into a 4-star hotel. Route passes directly through. Beautiful stop.', access:'Forest paths from Bàscara (~1h)', water:'Hotel La Odissea bar', sleep:'Hotel La Odissea ~€90+ (4-star castle!)', link:'', ll:'' }},
-      { km:'~7', name:'Ermita de La Mora', alt:'90m', tags:['c'], detail:{ desc:'Small chapel surrounded by ancient olive trees. A peaceful pause after the Orriols forest stretch.', access:'Farm paths from Orriols', water:'None', sleep:'None', link:'', ll:'' }},
-      { km:'~11', name:'Viladasens (Variant A)', alt:'95m', tags:['f'], detail:{ desc:'Navigate carefully here: pass church, reach cemetery, turn LEFT. Yellow arrows can be tricky at the cemetery junction.', access:'Farm tracks from La Mora', water:'Bar', sleep:'None', link:'', ll:'' }},
-      { km:'~21', name:'Cervià de Ter', alt:'70m', tags:['w','f'], detail:{ desc:'Route passes through from the monastery end. Cross village, cross road, then follow parallel to River Ter. Possible break point.', access:'Farm tracks via Raset', water:'Bar and services', sleep:'Limited — check ahead', link:'', ll:'' }},
-      { km:'~24', name:'Medinyà — routes merge', alt:'65m', tags:['w','f'], detail:{ desc:'Both variants (A + B) meet here. Riverside Ter walking begins. Menú del día ~€11 at Snack Bar Medinyà. Bus to Girona available.', access:'Both variants converge at motorway bridge', water:'Snack Bar Medinyà (~€11) · El Caliu (~€23)', sleep:'None · bus available to Girona', link:'', ll:'' }},
-      { km:'~28', name:'Sant Julià de Ramis', alt:'65m', tags:['c'], detail:{ desc:'Pass El cau de les Goges cave formation. Start of the final urban approach into Girona. Almost there!', access:'Riverside and forest paths from Medinyà', water:'Bar', sleep:'None', link:'', ll:'' }},
-      { km:'~31', name:'Sarrià de Ter', alt:'70m', tags:['w','f'], detail:{ desc:'Penultimate village. Camino and Ruta del Ter briefly diverge then reunite here. The end is near!', access:'Riverside path', water:'Bar', sleep:'None', link:'', ll:'' }},
-      { km:'34.7', name:'Girona 🎉', alt:'75m', tags:['w','f','s','c','t'], detail:{ desc:'You made it! 77.7 km from the monastery. Enter over Pont de Pedra. Cathedral, El Call, Onyar houses, Devesa park — all waiting.', access:'Train to Barcelona, Figueres, Madrid · buses', water:'Full city services', sleep:'Alberg Xanascat ~€18.90 · Hotel Llegendes · Equity Point', link:'https://www.girona.cat/turisme', ll:'Girona Tourism' }},
-    ]
-  }
+// SVG ICON HELPERS
+const I={
+  water:'<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>',
+  food:'<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>',
+  sleep:'<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>',
+  culture:'<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
+  train:'<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/><path d="M8 6h8"/><path d="M8 10h8"/></svg>',
+  pin:'<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>',
+  mountain:'<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="3,20 21,20 12,4"/></svg>',
+  chevdown:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,9 12,15 18,9"/></svg>',
+  ext:'<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>',
+  hotel:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>',
+  euro:'<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h12M4 14h12M19.5 9a6.5 6.5 0 1 0 0 6"/></svg>',
+  check:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg>',
+  alert:'<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>',
+  info:'<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
+  about:'<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
+  access:'<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="3,11 22,2 13,21 11,13"/></svg>',
+  arrow:'<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>',
+  trainBig:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/><path d="M8 6h8"/><path d="M8 10h8"/></svg>',
+  busBig:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6v6"/><path d="M15 6v6"/><path d="M2 12h19.6"/><path d="M18 18h3s.5-1.7.8-4.2c.1-.7.2-1.4.2-2.1V5H2v6.9c0 .7.1 1.4.2 2.1.3 2.5.8 4.2.8 4.2H5"/><circle cx="7" cy="18" r="2"/><path d="M9 18h5"/><circle cx="16" cy="18" r="2"/></svg>',
+  carBig:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16,8 20,8 23,11 23,16 16,16"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>',
 };
 
-const TAG_LABELS = { w:'Water', f:'Food', s:'Sleep', c:'Culture', t:'Train' };
-const TAG_CLASS  = { w:'wt-w', f:'wt-f', s:'wt-s', c:'wt-c', t:'wt-t' };
+const TC={w:'wt-w',f:'wt-f',s:'wt-s',c:'wt-c',t:'wt-t'};
+const TL={w:'Water',f:'Food',s:'Sleep',c:'Culture',t:'Train'};
+const TI={w:I.water,f:I.food,s:I.sleep,c:I.culture,t:I.train};
 
-const CHECKLIST = [
-  { group:'👟 Footwear & clothing', items:[
-    { name:'Trail running shoes or hiking boots', note:'Waterproof recommended Oct–Apr', priority:'high' },
-    { name:'Trekking poles', note:'Essential for Stage 1 descent to Pau (-430m)', priority:'high' },
-    { name:'Moisture-wicking socks (×3 pairs)', note:'Prevent blisters on long stages', priority:'high' },
-    { name:'Sun hat with neck cover', note:'Stage 1 descent is fully exposed', priority:'high' },
-    { name:'Light windproof jacket', note:'Tramuntana can arrive without warning', priority:'high' },
-    { name:'Rain layer / poncho', note:'Apr–May and Oct–Nov especially', priority:'med' },
+const STAGES={
+  1:{color:'#c8823a',title:'Sant Pere de Rodes → Figueres',
+    desc:'The most dramatic stage. A steep technical descent from a 10th-century monastery, then flat Empordà farmland to Dalí\'s city.',
+    chips:['25.3 km','↑ 180m','↓ 720m','7–9h','Medium'],
+    cl:['0km','2km','5km','10km','15km','17km','21km','23.6km','25.3km'],
+    cd:[521,320,200,90,33,28,42,35,30],
+    acc:[
+      {n:'Pensió Bartis',p:'~€35/night',d:'Basic pilgrim pension near Figueres station. Clean and reliable.',l:'https://www.booking.com/city/es/figueres.html',lt:'Search Figueres'},
+      {n:'Hotel Duran',p:'~€70/night',d:'Historic 1887 hotel in central Figueres. Traditional Catalan restaurant.',l:'https://www.hotelduran.com',lt:'hotelduran.com'},
+      {n:'Pre-stage: Port de la Selva',p:'from €40',d:'Stay the night before. Hotel Gran Sol or Pensió Xavi.',l:'https://www.portdelaselva.cat',lt:'Tourist info'},
+    ],
+    tips:[
+      {col:'#2a6a6a',ico:'water',title:'No water for 15 km',text:'Zero water from monastery to Vilajuïga. Carry 2+ litres. First bar is in Vilajuïga (~km 15).'},
+      {col:'#b83030',ico:'alert',title:'Technical descent to Pau',text:'The trail is a steep goat path (-430m in ~8km). Trekking poles essential. Road alternative: GIP-6041 to Vilajuïga.'},
+      {col:'#5c4a2a',ico:'pin',title:'Poor signage after Vilajuïga',text:'Only official Generalitat markers. No yellow arrows. Use Wikiloc GPX or GPS app.'},
+      {col:'#7a3a8a',ico:'culture',title:'Book Dalí Museum early',text:'The Teatre-Museu Dalí is one of Spain\'s most visited. Book online, especially in summer.'},
+    ],
+    wps:[
+      {km:'0',n:'Sant Pere de Rodes',alt:'521m',t:['c','w'],d:{desc:'Start. 10th-c Romanesque monastery, BCIN. Get your first credencial stamp here.',acc:'Car (parking) or GR-92 from Port de la Selva (2h)',wat:'Vending machine at entrance',slp:'Hotel Gran Sol / Pensió Xavi (Port de la Selva)',l:'https://portdelaselva.cat',ll:'Monastery info'}},
+      {km:'2',n:'Ermita de Santa Helena',alt:'320m',t:['c'],d:{desc:'Pre-Romanesque ruins, 9th century. First official yellow arrow of the route appears here.',acc:'Trail from monastery (~40 min)',wat:'None — carry from monastery',slp:'None — continue to Pau',l:'',ll:''}},
+      {km:'~10',n:'Pau',alt:'90m',t:['f'],d:{desc:'Medieval village, Romanesque church. Restaurant opens ~1pm. End of the steep technical descent.',acc:'Goat path from Creu Blanca OR GIP-6041 road',wat:'Bar/restaurant (afternoon only)',slp:'None — Vilajuïga 5km ahead',l:'',ll:''}},
+      {km:'~15',n:'Vilajuïga',alt:'33m',t:['w','f','t'],d:{desc:'First town with full services. R11 train station. Bars, supermarket. Alternative start point.',acc:'R11 train from Figueres (~8 min)',wat:'Bars, supermarket',slp:'Pensió Xavi (verify availability)',l:'https://www.renfe.com',ll:'R11 trains'}},
+      {km:'~18',n:'Pedret i Marzà',alt:'29m',t:['c'],d:{desc:'Church of Pedret worth a visit. Attention at Marzà crossing — stay on correct riverbank.',acc:'Paved farm tracks from Vilajuïga',wat:'None — carry from Vilajuïga',slp:'None',l:'',ll:''}},
+      {km:'~21',n:'Peralada',alt:'42m',t:['w','f','s','c'],d:{desc:'Medieval walled town, spectacular castle (wines, casino). Good services. Get a stamp here.',acc:'Farm tracks from Marzà past the castle',wat:'Several bars and restaurants',slp:'Can Maret ~€45 (1km off route)',l:'https://www.castellperalada.com',ll:'Castell Peralada'}},
+      {km:'23.6',n:'Vilabertran',alt:'35m',t:['w','c'],d:{desc:'Romanesque collegiate church (11th c) — National Monument. Last bar before Figueres.',acc:'Asphalt road from Peralada',wat:'Bar in village',slp:'None — Figueres 1.7km ahead',l:'',ll:''}},
+      {km:'25.3',n:'Figueres',alt:'30m',t:['w','f','s','c','t'],d:{desc:'End Stage 1. Birthplace of Dalí. Theatre-Museum (book ahead!). Castell de Sant Ferran free.',acc:'Train (AVE, R11) · Bus connections',wat:'Full city services',slp:'Pensió Bartis ~€35 · Hotel Duran ~€70',l:'https://www.visitfigueres.cat',ll:'Figueres tourism'}},
+    ]},
+  2:{color:'#2a6a6a',title:'Figueres → Bàscara',
+    desc:'The shortest stage — a gentle recovery walk across the Empordà plain. Leave late, visit Figueres in the morning. Wheat fields, small villages, walled arrival.',
+    chips:['17.7 km','↑ 140m','↓ 120m','4–5h','Easy'],
+    cl:['0km','4km','7km','9km','13km','17.7km'],
+    cd:[30,45,50,55,65,75],
+    acc:[
+      {n:'Hostal Fluvià',p:'~€31/night',d:'The only option in Bàscara. Family-run, central, pilgrim-friendly. The classic choice.',l:'',lt:''},
+      {n:'Castle Hotel Orriols',p:'~€90+/night',d:'4-star hotel in a castle right on the Camino at Orriols. A splurge but unforgettable.',l:'',lt:''},
+      {n:'Mas Alba Terradelles',p:'B&B rate',d:'Agrotourism goat cheese farm ~2.7km off route past Orriols. Book ahead.',l:'',lt:''},
+    ],
+    tips:[
+      {col:'#c8823a',ico:'about',title:'Leave Figueres late',text:'Only 4–5 hours of walking. Visit the Dalí Museum or Castell de Sant Ferran in the morning first.'},
+      {col:'#5c4a2a',ico:'arrow',title:'Mostly paved farm roads',text:'Flat paved lanes and minor roads. Comfortable terrain. Good yellow arrows throughout.'},
+      {col:'#2a6a6a',ico:'food',title:'Services in every village',text:'Santa Llogaia, Borrassà, Creixell, Pontós all have bars. Borrassà\'s Civic Centre bar is open even Sundays!'},
+      {col:'#7a3a8a',ico:'access',title:'Good yellow arrows here',text:'Exit Figueres via Carrer San Pau. The Girona Camino Association has marked this section well.'},
+    ],
+    wps:[
+      {km:'0',n:'Figueres',alt:'30m',t:['w','f','s','t'],d:{desc:'Exit via Carrer San Pau. Follow ground markers right side. Yellow arrows well-marked.',acc:'Train station (R11, AVE) · bus station',wat:'Full city services',slp:'Pensió Bartis · Hotel Duran',l:'https://www.visitfigueres.cat',ll:'Figueres tourism'}},
+      {km:'~4',n:'Santa Llogaia d\'Àlguema',alt:'45m',t:['f'],d:{desc:'First village after Figueres. Turn right at entrance onto dirt track through cereal fields.',acc:'Wide pavement from Figueres, ~45 min',wat:'Bar',slp:'None',l:'',ll:''}},
+      {km:'~7',n:'Borrassà',alt:'50m',t:['w','f'],d:{desc:'Cross motorway bridge. The Civic Centre bar opens even on Sunday mornings. Great stamp point.',acc:'Dirt track from Santa Llogaia crossing motorway',wat:'Civic Centre bar (incl. Sundays)',slp:'None',l:'',ll:''}},
+      {km:'~9',n:'Creixell',alt:'55m',t:['f'],d:{desc:'Small village. Route turns sharply RIGHT at the church, then right again 100m later. Watch arrows.',acc:'Farm tracks from Borrassà',wat:'Bar',slp:'None',l:'',ll:''}},
+      {km:'~13',n:'Pontós',alt:'65m',t:['c','f'],d:{desc:'Pass church and old convent. Ermita de Santa Anna (15th c) nearby. Ruins of Castell de Pontós visible.',acc:'Track near N-II then farm paths',wat:'Bar',slp:'None',l:'',ll:''}},
+      {km:'17.7',n:'Bàscara',alt:'75m',t:['w','f','s'],d:{desc:'Arrive via Portal de Girona arch. Medieval walled town. Info board shows 2 variants for Stage 3.',acc:'Farm road from Pontós',wat:'Hostal Fluvià, village bar',slp:'Hostal Fluvià ~€31 (only option)',l:'https://www.gronze.com',ll:'Gronze pilgrim info'}},
+    ]},
+  3:{color:'#7a3a8a',title:'Bàscara → Girona',
+    desc:'The longest and most rewarding stage. Two variants through forests and farms, then the River Ter all the way into the golden old city of Girona.',
+    chips:['34.7 km','↑ 280m','↓ 285m','8–10h','Med–Hard'],
+    cl:['0km','4km','7km','11km','21km','24km','28km','31km','34.7km'],
+    cd:[75,110,90,95,70,65,65,70,75],
+    acc:[
+      {n:'Alberg Girona Xanascat',p:'~€18.90/night',d:'Official pilgrim hostel, breakfast included. Pilgrim discount with credencial. Best value.',l:'https://xanascat.cat',lt:'xanascat.cat'},
+      {n:'Hotel Llegendes de Girona',p:'boutique rate',d:'Inside the old city walls. Atmospheric stone building, steps from the cathedral.',l:'https://www.booking.com/city/es/gerona.html',lt:'Search Girona'},
+      {n:'Equity Point Hostel',p:'~€25+/night',d:'Social hostel near train station. Popular with pilgrims and backpackers.',l:'https://www.booking.com/city/es/gerona.html',lt:'Search Girona'},
+    ],
+    tips:[
+      {col:'#b83030',ico:'alert',title:'Start by 7:30 AM',text:'At 34.7 km this is a big day. Leave early. Alternative: stop overnight in Cervià de Ter (~km 21 from Bàscara).'},
+      {col:'#2a5c2a',ico:'pin',title:'Rural and wooded first half',text:'The first 20 km are quiet — wheat fields, oak forests, small farms. Almost all off-road with plenty of shade.'},
+      {col:'#2a6a6a',ico:'train',title:'Bus option from Medinyà',text:'Many pilgrims walk to Medinyà (~km 24) then take a bus to Girona. Saves ~11km of urban walking.'},
+      {col:'#c8823a',ico:'food',title:'Eat at Medinyà',text:'Snack Bar Medinyà: menú ~€11. Restaurant El Caliu: ~€23. Both at the point where the two variants merge.'},
+    ],
+    wps:[
+      {km:'0',n:'Bàscara',alt:'75m',t:['w','f','s'],d:{desc:'Exit Portal de Girona. Info board shows both variants: Viladasens (A) or Vilademuls (B). Choose your adventure.',acc:'End of Stage 2',wat:'Bar in village',slp:'Hostal Fluvià ~€31',l:'',ll:''}},
+      {km:'~4',n:'Orriols (Variant A)',alt:'110m',t:['s','c'],d:{desc:'Beautiful village, castle converted to 4-star hotel. Route passes directly through.',acc:'Forest paths from Bàscara (~1h)',wat:'Hotel La Odissea bar',slp:'Hotel La Odissea ~€90+ (4-star castle)',l:'',ll:''}},
+      {km:'~7',n:'Ermita de La Mora',alt:'90m',t:['c'],d:{desc:'Small chapel surrounded by ancient olive trees. Peaceful pause after the Orriols forest.',acc:'Farm paths from Orriols',wat:'None',slp:'None',l:'',ll:''}},
+      {km:'~11',n:'Viladasens (Variant A)',alt:'95m',t:['f'],d:{desc:'Navigate carefully: pass church, reach cemetery, turn LEFT. Arrows tricky at cemetery junction.',acc:'Farm tracks from La Mora',wat:'Bar',slp:'None',l:'',ll:''}},
+      {km:'~21',n:'Cervià de Ter',alt:'70m',t:['w','f'],d:{desc:'Cross village from monastery end, cross road, then follow River Ter. Possible break point.',acc:'Farm tracks via Raset',wat:'Bar and services',slp:'Limited — check ahead',l:'',ll:''}},
+      {km:'~24',n:'Medinyà — routes merge',alt:'65m',t:['w','f'],d:{desc:'Both variants meet here. Riverside Ter walking begins. Bus to Girona available.',acc:'Both variants converge at motorway bridge',wat:'Snack Bar ~€11 · El Caliu ~€23',slp:'None · bus to Girona available',l:'',ll:''}},
+      {km:'~28',n:'Sant Julià de Ramis',alt:'65m',t:['c'],d:{desc:'Pass El cau de les Goges cave. Start of the final urban approach to Girona.',acc:'Riverside and forest paths',wat:'Bar',slp:'None',l:'',ll:''}},
+      {km:'~31',n:'Sarrià de Ter',alt:'70m',t:['w','f'],d:{desc:'Penultimate village. Camino and Ruta del Ter briefly diverge then reunite. Almost there!',acc:'Riverside path',wat:'Bar',slp:'None',l:'',ll:''}},
+      {km:'34.7',n:'Girona — Arrived!',alt:'75m',t:['w','f','s','c','t'],d:{desc:'77.7 km done! Enter over Pont de Pedra. Cathedral, El Call, Onyar houses, Devesa park all waiting.',acc:'Train to Barcelona, Figueres, Madrid · buses',wat:'Full city services',slp:'Alberg Xanascat ~€18.90 · Hotel Llegendes · Equity Point',l:'https://www.girona.cat/turisme',ll:'Girona Tourism'}},
+    ]}
+};
+
+const CL_DATA=[
+  {g:'Footwear & clothing',icon:I.hotel,items:[
+    {n:'Trail shoes or hiking boots',note:'Waterproof recommended Oct–Apr',p:'hi'},
+    {n:'Trekking poles',note:'Essential for Stage 1 descent to Pau (-430m)',p:'hi'},
+    {n:'Moisture-wicking socks ×3',note:'Prevent blisters on long stages',p:'hi'},
+    {n:'Sun hat with neck cover',note:'Stage 1 descent fully exposed',p:'hi'},
+    {n:'Light windproof jacket',note:'Tramuntana can arrive without warning',p:'hi'},
+    {n:'Rain layer / poncho',note:'Apr–May and Oct–Nov especially',p:'md'},
   ]},
-  { group:'🎒 Pack & gear', items:[
-    { name:'Backpack 30–40L', note:'Keep it under 10% of your body weight', priority:'high' },
-    { name:'2L+ water capacity (bottles or bladder)', note:'Mandatory from monastery to Vilajuïga', priority:'high' },
-    { name:'Headlamp + spare batteries', note:'For early Stage 3 starts', priority:'med' },
-    { name:'Trekking pole tips & spare straps', note:'The descent to Pau is rough', priority:'med' },
-    { name:'Dry bags for electronics', note:'Coastal humidity and rain', priority:'med' },
+  {g:'Pack & gear',icon:I.about,items:[
+    {n:'Backpack 30–40L',note:'Keep under 10% of body weight',p:'hi'},
+    {n:'2L+ water capacity',note:'Mandatory from monastery to Vilajuïga (15km dry)',p:'hi'},
+    {n:'Headlamp + spare batteries',note:'For early Stage 3 starts',p:'md'},
+    {n:'Dry bags for electronics',note:'Coastal humidity and rain',p:'md'},
   ]},
-  { group:'🏥 First aid & health', items:[
-    { name:'Blister kit (Compeed + needles)', note:'Especially for Stage 3 (34.7 km!)', priority:'high' },
-    { name:'SPF 50 sunscreen', note:'Exposed sections brutal in summer', priority:'high' },
-    { name:'Anti-inflammatory (ibuprofen)', note:'Knees feel Stage 1 descent for days', priority:'high' },
-    { name:'Electrolyte tablets', note:'Summer + long stages = salt loss', priority:'med' },
-    { name:'Small first aid kit', note:'Plasters, gauze, antiseptic', priority:'med' },
+  {g:'First aid & health',icon:I.info,items:[
+    {n:'Blister kit (Compeed + needles)',note:'Especially for Stage 3 (34.7km)',p:'hi'},
+    {n:'SPF 50 sunscreen',note:'Exposed sections brutal in summer',p:'hi'},
+    {n:'Anti-inflammatory (ibuprofen)',note:'Knees feel Stage 1 descent for days',p:'hi'},
+    {n:'Electrolyte tablets',note:'Summer + long stages = salt loss',p:'md'},
+    {n:'Small first aid kit',note:'Plasters, gauze, antiseptic',p:'md'},
   ]},
-  { group:'📜 Documents & apps', items:[
-    { name:'Credencial (pilgrim passport)', note:'Get first stamp at the monastery', priority:'high' },
-    { name:'Wikiloc app with GPX tracks downloaded', note:'Offline! No signal on parts of Stage 1', priority:'high' },
-    { name:'Travel insurance', note:'EU EHIC card + extra coverage', priority:'high' },
-    { name:'Cash euros', note:'Many rural bars are cash-only', priority:'high' },
-    { name:'This app saved offline 😄', note:'Share → Add to Home Screen in Safari', priority:'med' },
+  {g:'Documents & apps',icon:I.ext,items:[
+    {n:'Credencial (pilgrim passport)',note:'Get first stamp at the monastery',p:'hi'},
+    {n:'Wikiloc app with GPX offline',note:'No signal on parts of Stage 1',p:'hi'},
+    {n:'Travel insurance + EU EHIC card',note:'Essential for any emergency',p:'hi'},
+    {n:'Cash euros',note:'Many rural bars are cash-only',p:'hi'},
+    {n:'This app saved offline',note:'Safari → Share → Add to Home Screen',p:'md'},
   ]},
-  { group:'🍫 Food & fuel', items:[
-    { name:'Emergency snacks (nuts, bars)', note:'For the 15 km no-services stretch (Stage 1)', priority:'high' },
-    { name:'Electrolyte powder / isotonic drinks', note:'Summer walking depletes salts fast', priority:'med' },
-    { name:'Small packed lunch for Stage 1', note:'Pau restaurant opens at 1pm only', priority:'high' },
+  {g:'Food & fuel',icon:I.food,items:[
+    {n:'Emergency snacks (nuts, bars)',note:'For the 15km no-services stretch (Stage 1)',p:'hi'},
+    {n:'Packed lunch for Stage 1',note:'Pau restaurant opens at 1pm only',p:'hi'},
+    {n:'Electrolyte powder / isotonic',note:'Summer walking depletes salts fast',p:'md'},
   ]},
 ];
 
-// ═══════════════════════════════════════
+const MONTHS=[
+  {m:'Jan',lo:6,hi:12,bar:35,color:'#7ab0d0',note:'Tramuntana'},
+  {m:'Feb',lo:7,hi:13,bar:38,color:'#7ab0d0',note:'Cold'},
+  {m:'Mar',lo:9,hi:16,bar:50,color:'#90c090',note:'Improving'},
+  {m:'Apr',lo:11,hi:19,bar:65,color:'#a8d060',note:'Best season'},
+  {m:'May',lo:14,hi:22,bar:75,color:'#c8d050',note:'Best season'},
+  {m:'Jun',lo:18,hi:26,bar:85,color:'#e8c040',note:'Getting hot'},
+  {m:'Jul',lo:21,hi:30,bar:95,color:'#e89030',note:'Very hot'},
+  {m:'Aug',lo:21,hi:30,bar:95,color:'#e07020',note:'Very hot'},
+  {m:'Sep',lo:18,hi:26,bar:80,color:'#d0a040',note:'Best season'},
+  {m:'Oct',lo:14,hi:21,bar:68,color:'#c07820',note:'Tramuntana'},
+  {m:'Nov',lo:10,hi:16,bar:48,color:'#90a890',note:'Cool'},
+  {m:'Dec',lo:7,hi:12,bar:36,color:'#7898b8',note:'Cold'},
+];
+
+const W_TIPS=[
+  {col:'#2a6a6a',ico:'water',title:'Hydration',text:'Minimum 2L from monastery to Vilajuïga (15km, no water). In summer carry 3L. Electrolyte tablets recommended.'},
+  {col:'#b83030',ico:'alert',title:'Sun protection (critical Jun–Sep)',text:'SPF 50, sun hat with neck cover, sunglasses are non-negotiable. The descent to Pau is completely exposed.'},
+  {col:'#2a6a6a',ico:'access',title:'Windproof layer — always',text:'Always carry a light windproof jacket. The tramuntana arrives without warning and can drop the felt temperature by 10°C instantly.'},
+  {col:'#5c4a2a',ico:'hotel',title:'Footwear',text:'Trail running shoes work great on this route. Waterproof recommended Oct–Apr. Trekking poles essential for Stage 1.'},
+];
+
+const TRANSPORT=[
+  {section:'start',title:'Train to start',sub:'R11 Rodalies + taxi or bus',icon:I.trainBig,rows:[
+    {from:'Barcelona → Llançà',d:'R11 Rodalies · ~2h · change at Figueres',l:'https://www.renfe.com',lt:'Renfe'},
+    {from:'Llançà → Port de la Selva',d:'Taxi ~€15 · SARFA bus (seasonal)',l:'https://teisa-bus.com',lt:'SARFA'},
+    {from:'Madrid → Figueres (AVE)',d:'~3h direct · Figueres-Vilafant station',l:'https://www.renfe.com',lt:'Book'},
+  ]},
+  {section:'between',title:'R11 Rodalies — key stops',sub:'Portbou ↔ Barcelona Sants',icon:I.trainBig,rows:[
+    {from:'Vilajuïga ↔ Figueres',d:'~8 min · skip Stage 1 second half',l:'https://www.rodalies.gencat.cat',lt:'Times'},
+    {from:'Figueres ↔ Girona',d:'~35 min · skip stages 2+3',l:'https://www.rodalies.gencat.cat',lt:'Times'},
+    {from:'Medinyà → Girona (bus)',d:'Saves ~11km of Stage 3 walking',l:'https://www.moovitapp.com',lt:'Moovit'},
+  ]},
+  {section:'between',title:'Regional buses',sub:'TEISA / SARFA',icon:I.busBig,rows:[
+    {from:'Figueres ↔ Port de la Selva',d:'Seasonal (summer). Check timetable.',l:'https://teisa-bus.com',lt:'TEISA'},
+    {from:'Figueres ↔ La Jonquera',d:'For Coll de Panissars alternative start',l:'https://teisa-bus.com',lt:'TEISA'},
+  ]},
+];
+
 // STATE
-// ═══════════════════════════════════════
-let currentStage = 1;
-let checkState = JSON.parse(localStorage.getItem('caminoChecks') || '{}');
-let chartInstances = {};
+let curStage=1;
+let checks={};
+try{checks=JSON.parse(localStorage.getItem('cc')||'{}');}catch(e){}
+let charts={};
 
-// ═══════════════════════════════════════
 // NAVIGATION
-// ═══════════════════════════════════════
-function showPage(id, btn) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('page-' + id).classList.add('active');
+function showPage(id,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
   btn.classList.add('active');
-  document.getElementById('scroll-area').scrollTop = 0;
-  if (id === 'stages') renderStageDetail(currentStage);
+  document.getElementById('sa').scrollTop=0;
+  if(id==='stages') renderStage(curStage);
 }
-
-function openStage(n) {
-  currentStage = n;
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.querySelector('[data-page="stages"]').classList.add('active');
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+function openStage(n){
+  curStage=n;
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById('page-stages').classList.add('active');
-  document.getElementById('scroll-area').scrollTop = 0;
-  renderStageDetail(n);
-  updateStagePicker(n);
+  document.querySelectorAll('.tb')[1].classList.add('active');
+  document.getElementById('sa').scrollTop=0;
+  updatePicker(n);
+  renderStage(n);
 }
-
-function switchStage(n) {
-  currentStage = n;
-  updateStagePicker(n);
-  renderStageDetail(n);
-  document.getElementById('scroll-area').scrollTop = 0;
+function switchStage(n){
+  curStage=n;
+  updatePicker(n);
+  renderStage(n);
+  document.getElementById('sa').scrollTop=0;
 }
-
-function updateStagePicker(n) {
-  [1,2,3].forEach(i => {
-    const btn = document.getElementById('spb'+i);
-    const s = STAGES[i];
-    btn.classList.toggle('active', i === n);
-    if (i === n) btn.style.background = s.color;
-    else btn.style.background = '';
+function updatePicker(n){
+  [1,2,3].forEach(i=>{
+    const b=document.getElementById('spb'+i);
+    b.classList.toggle('active',i===n);
+    b.style.background=i===n?STAGES[i].color:'';
+    b.style.borderColor=i===n?'transparent':'';
   });
 }
 
-// ═══════════════════════════════════════
-// RENDER STAGE DETAIL
-// ═══════════════════════════════════════
-function renderStageDetail(n) {
-  const s = STAGES[n];
-  const area = document.getElementById('stage-detail-area');
-
-  // destroy old chart
-  if (chartInstances[n]) { try { chartInstances[n].destroy(); } catch(e){} }
-
-  area.innerHTML = `
-    <div style="margin:14px 16px 0;background:var(--card);border:0.5px solid var(--border);border-radius:16px;overflow:hidden">
-      <div style="background:${s.color};padding:16px 18px">
-        <div style="font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:6px">Stage ${n} of 3</div>
-        <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:white;line-height:1.2;margin-bottom:6px">${s.title}</div>
-        <div style="font-size:13px;color:rgba(255,255,255,.8);line-height:1.5">${s.desc}</div>
-        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px">
-          ${s.chips.map(c=>`<span style="background:rgba(255,255,255,.2);color:white;font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px">${c}</span>`).join('')}
-        </div>
-      </div>
+// STAGE DETAIL
+function renderStage(n){
+  const s=STAGES[n];
+  if(charts[n]){try{charts[n].destroy();}catch(e){} delete charts[n];}
+  const a=document.getElementById('sda');
+  a.innerHTML=`
+    <div style="margin:14px 16px 0;background:${s.color};border-radius:16px;padding:18px;color:#fff">
+      <div style="font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;opacity:.75;margin-bottom:6px">Stage ${n} of 3</div>
+      <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;line-height:1.2;margin-bottom:6px">${s.title}</div>
+      <div style="font-size:13px;opacity:.85;line-height:1.5">${s.desc}</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px">${s.chips.map(c=>`<span style="background:rgba(255,255,255,.2);color:#fff;font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px">${c}</span>`).join('')}</div>
     </div>
-
-    <div class="section-title">Elevation profile</div>
-    <div class="chart-wrap">
-      <div class="chart-container"><canvas id="echart${n}" role="img" aria-label="Elevation profile stage ${n}"></canvas></div>
-    </div>
-
-    <div class="section-title">Waypoints <span style="font-weight:400;color:var(--text3)">(tap to expand)</span></div>
-    <div class="wp-list" id="wp-list-${n}"></div>
-
-    <div class="section-title">Accommodation</div>
-    <div class="accom-scroll">${s.accommodations.map(a=>`
-      <div class="accom-item">
-        <div class="accom-name">${a.name}</div>
-        <div class="accom-price">${a.price}</div>
-        <div class="accom-desc">${a.desc}</div>
-        ${a.link ? `<a class="accom-link" href="${a.link}" target="_blank">${a.linkText} →</a>` : ''}
-      </div>`).join('')}</div>
-
-    <div class="section-title">Tips & warnings</div>
-    <div class="tips-list">${s.tips.map(t=>`
-      <div class="tip-item">
-        <div class="tip-em">${t.em}</div>
-        <div class="tip-text"><strong>${t.title}</strong>${t.text}</div>
-      </div>`).join('')}
-    </div>
-    <div style="height:16px"></div>
-  `;
-
-  buildWaypointList(n);
-  renderElevationChart(n, s);
+    <div class="st">${I.mountain} Elevation profile</div>
+    <div class="cw"><div class="cc"><canvas id="ec${n}" role="img" aria-label="Elevation profile stage ${n}"></canvas></div></div>
+    <div class="st">${I.pin} Waypoints <span style="font-weight:400;font-style:italic;text-transform:none;font-size:10px">(tap to expand)</span></div>
+    <div class="wpl" id="wpl${n}"></div>
+    <div class="st">${I.hotel} Accommodation</div>
+    <div class="asc">${s.acc.map(a=>`<div class="ai"><div class="ai-h"><div class="ai-ico">${I.hotel}</div><div class="ai-n">${a.n}</div></div><div class="ai-p">${I.euro} ${a.p}</div><div class="ai-d">${a.d}</div>${a.l?`<a class="ai-a" href="${a.l}" target="_blank">${a.lt} ${I.ext}</a>`:''}</div>`).join('')}</div>
+    <div class="st">${I.about} Tips &amp; warnings</div>
+    <div class="tpl">${s.tips.map(t=>`<div class="tpi"><div class="tpi-iw" style="background:${t.col}15">${makeTipIcon(t.ico,t.col)}</div><div class="tpi-t"><strong>${t.title}</strong>${t.text}</div></div>`).join('')}</div>
+    <div style="height:16px"></div>`;
+  buildWPs(n);
+  setTimeout(()=>buildChart(n,s),60);
 }
 
-function buildWaypointList(n) {
-  const s = STAGES[n];
-  const list = document.getElementById('wp-list-' + n);
-  s.waypoints.forEach((w, i) => {
-    const id = `wpi-${n}-${i}`;
-    const div = document.createElement('div');
-    div.className = 'wp-item';
-    div.id = id;
-    div.innerHTML = `
-      <div class="wp-left">
-        <div class="wp-circle" style="background:${s.color}"></div>
-        <div class="wp-vline" style="background:${s.color}33"></div>
+function makeTipIcon(ico,col){
+  const svgMap={
+    water:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="${col}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>`,
+    alert:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="${col}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
+    pin:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="${col}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`,
+    culture:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="${col}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>`,
+    about:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="${col}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`,
+    arrow:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="${col}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>`,
+    food:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="${col}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>`,
+    train:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="${col}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/><path d="M8 6h8"/><path d="M8 10h8"/></svg>`,
+    hotel:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="${col}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>`,
+    access:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="${col}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3,11 22,2 13,21 11,13"/></svg>`,
+    info:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="${col}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`,
+    ext:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="${col}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`,
+  };
+  return svgMap[ico]||svgMap.about;
+}
+
+function buildWPs(n){
+  const s=STAGES[n];
+  const list=document.getElementById('wpl'+n);
+  s.wps.forEach((w,i)=>{
+    const id=`w${n}-${i}`;
+    const div=document.createElement('div');
+    div.className='wpi';
+    div.id=id;
+    div.innerHTML=`
+      <div class="wpl-l">
+        <div class="wp-dot" style="background:${s.color}"></div>
+        <div class="wp-vl" style="background:${s.color}33"></div>
       </div>
-      <div class="wp-right">
-        <div class="wp-main" onclick="toggleWP('${id}')">
-          <div class="wp-info">
-            <div class="wp-name">${w.name}</div>
-            <div class="wp-meta">km ${w.km} · ${w.alt}</div>
-            <div class="wp-tags-row">${w.tags.map(t=>`<span class="wt ${TAG_CLASS[t]}">${TAG_LABELS[t]}</span>`).join('')}</div>
+      <div class="wp-r">
+        <div class="wp-m" onclick="toggleWP('${id}')">
+          <div class="wp-i">
+            <div class="wp-name">${w.n}</div>
+            <div class="wp-mt">${I.pin} km ${w.km} &nbsp;· &nbsp;${I.mountain} ${w.alt}</div>
+            <div class="wp-tr">${w.t.map(t=>`<span class="wt ${TC[t]}">${TI[t]}${TL[t]}</span>`).join('')}</div>
           </div>
-          <div class="wp-chevron">▾</div>
+          <div class="wp-ch">${I.chevdown}</div>
         </div>
-        <div class="wp-detail-box">
-          <div class="wp-detail-inner">
-            <div class="wd-block"><strong>About</strong>${w.detail.desc}</div>
-            <div class="wd-block"><strong>Access</strong>${w.detail.access}</div>
-            <div class="wd-block"><strong>Water & food</strong>${w.detail.water}</div>
-            <div class="wd-block"><strong>Sleep</strong>${w.detail.sleep}</div>
-            ${w.detail.link ? `<div class="wd-block wd-full"><strong>More info</strong><a href="${w.detail.link}" target="_blank">${w.detail.ll} ↗</a></div>` : ''}
+        <div class="wp-db">
+          <div class="wp-di">
+            <div class="wdb"><strong>${I.about}About</strong>${w.d.desc}</div>
+            <div class="wdb"><strong>${I.access}Access</strong>${w.d.acc}</div>
+            <div class="wdb"><strong>${I.water}Water &amp; food</strong>${w.d.wat}</div>
+            <div class="wdb"><strong>${I.sleep}Sleep</strong>${w.d.slp}</div>
+            ${w.d.l?`<div class="wdb wdf"><strong>${I.ext}More info</strong><a href="${w.d.l}" target="_blank">${w.d.ll} ${I.ext}</a></div>`:''}
           </div>
         </div>
       </div>`;
@@ -1371,168 +746,132 @@ function buildWaypointList(n) {
   });
 }
 
-function toggleWP(id) {
-  const el = document.getElementById(id);
-  el.classList.toggle('open');
+function toggleWP(id){
+  document.getElementById(id).classList.toggle('open');
 }
 
-function renderElevationChart(n, s) {
-  setTimeout(() => {
-    const canvas = document.getElementById('echart'+n);
-    if (!canvas) return;
-    const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const tc = isDark ? 'rgba(200,160,100,0.5)' : 'rgba(92,74,42,0.4)';
-    const gc = isDark ? 'rgba(90,60,30,0.12)' : 'rgba(92,74,42,0.06)';
-    chartInstances[n] = new Chart(canvas, {
-      type:'line',
-      data:{
-        labels: s.chartLabels,
-        datasets:[{ data: s.chartData, borderColor: s.color, backgroundColor: s.color+'22', borderWidth:2.5, fill:true, tension:0.4, pointRadius:5, pointBackgroundColor:s.color, pointBorderColor: isDark?'#1e1a10':'#fff', pointBorderWidth:2 }]
-      },
-      options:{
-        responsive:true, maintainAspectRatio:false,
-        plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: i=>i.raw+'m' } } },
-        scales:{
-          x:{ ticks:{font:{size:10}, color:tc, autoSkip:false, maxRotation:0}, grid:{display:false} },
-          y:{ ticks:{font:{size:10}, color:tc, callback:v=>v+'m'}, grid:{color:gc} }
-        }
-      }
-    });
-  }, 50);
-}
-
-// ═══════════════════════════════════════
-// WEATHER PAGE
-// ═══════════════════════════════════════
-const MONTHS = [
-  { m:'Jan', lo:6, hi:12, bar:35, color:'#7ab0d0', note:'Tramuntana' },
-  { m:'Feb', lo:7, hi:13, bar:38, color:'#7ab0d0', note:'Cold & windy' },
-  { m:'Mar', lo:9, hi:16, bar:50, color:'#90c090', note:'Improving' },
-  { m:'Apr', lo:11, hi:19, bar:65, color:'#a8d060', note:'Best season' },
-  { m:'May', lo:14, hi:22, bar:75, color:'#c8d050', note:'Best season' },
-  { m:'Jun', lo:18, hi:26, bar:85, color:'#e8c040', note:'Getting hot' },
-  { m:'Jul', lo:21, hi:30, bar:95, color:'#e89030', note:'Very hot' },
-  { m:'Aug', lo:21, hi:30, bar:95, color:'#e07020', note:'Very hot' },
-  { m:'Sep', lo:18, hi:26, bar:80, color:'#d0a040', note:'Best season' },
-  { m:'Oct', lo:14, hi:21, bar:68, color:'#c07820', note:'Tramuntana' },
-  { m:'Nov', lo:10, hi:16, bar:48, color:'#90a890', note:'Cool & quiet' },
-  { m:'Dec', lo:7, hi:12, bar:36, color:'#7898b8', note:'Cold' },
-];
-
-function buildWeatherPage() {
-  const container = document.getElementById('temp-rows');
-  MONTHS.forEach(m => {
-    const div = document.createElement('div');
-    div.className = 'month-row';
-    div.innerHTML = `
-      <div class="month-name">${m.m}</div>
-      <div class="month-bar-wrap">
-        <div class="month-bar" style="width:${m.bar}%;background:${m.color}">${m.lo}°–${m.hi}°C</div>
-      </div>
-      <div class="month-notes">${m.note}</div>`;
-    container.appendChild(div);
+function buildChart(n,s){
+  const c=document.getElementById('ec'+n);
+  if(!c)return;
+  const dk=window.matchMedia('(prefers-color-scheme:dark)').matches;
+  const tc=dk?'rgba(200,160,100,.45)':'rgba(92,74,42,.4)';
+  const gc=dk?'rgba(90,60,30,.1)':'rgba(92,74,42,.05)';
+  charts[n]=new Chart(c,{
+    type:'line',
+    data:{labels:s.cl,datasets:[{data:s.cd,borderColor:s.color,backgroundColor:s.color+'22',borderWidth:2.5,fill:true,tension:0.4,pointRadius:5,pointBackgroundColor:s.color,pointBorderColor:dk?'#1e1a10':'#fff',pointBorderWidth:2}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:i=>i.raw+'m'}}},scales:{x:{ticks:{font:{size:10},color:tc,autoSkip:false,maxRotation:0},grid:{display:false}},y:{ticks:{font:{size:10},color:tc,callback:v=>v+'m'},grid:{color:gc}}}}
   });
 }
 
-// ═══════════════════════════════════════
-// CHECKLIST
-// ═══════════════════════════════════════
-function buildChecklist() {
-  const area = document.getElementById('checklist-area');
-  CHECKLIST.forEach((group, gi) => {
-    const titleEl = document.createElement('div');
-    titleEl.className = 'section-title';
-    titleEl.textContent = group.group;
-    area.appendChild(titleEl);
+// WEATHER
+function buildWeather(){
+  // Stars
+  const r=[5,5,3,2];
+  ['ss1','ss2','ss3','ss4'].forEach((id,i)=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    for(let s=1;s<=5;s++){
+      const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+      svg.setAttribute('width','13');svg.setAttribute('height','13');svg.setAttribute('viewBox','0 0 24 24');
+      const poly=document.createElementNS('http://www.w3.org/2000/svg','polygon');
+      poly.setAttribute('points','12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26');
+      if(s<=r[i]){poly.setAttribute('fill','#e8a85a');poly.setAttribute('stroke','#e8a85a');}
+      else{poly.setAttribute('fill','none');poly.setAttribute('stroke','rgba(92,74,42,.2)');}
+      svg.appendChild(poly);el.appendChild(svg);
+    }
+  });
+  // Temp chart
+  const tc=document.getElementById('tc');
+  MONTHS.forEach(m=>{
+    const row=document.createElement('div');
+    row.className='mr';
+    row.innerHTML=`<div class="mn">${m.m}</div><div class="mw"><div class="mb" style="width:${m.bar}%;background:${m.color}">${m.lo}–${m.hi}°C</div></div><div class="mnt">${m.note}</div>`;
+    tc.appendChild(row);
+  });
+  // Tips
+  const wt=document.getElementById('wtips');
+  W_TIPS.forEach(t=>{
+    const d=document.createElement('div');
+    d.className='tpi';
+    d.innerHTML=`<div class="tpi-iw" style="background:${t.col}15">${makeTipIcon(t.ico,t.col)}</div><div class="tpi-t"><strong>${t.title}</strong>${t.text}</div>`;
+    wt.appendChild(d);
+  });
+}
 
-    const card = document.createElement('div');
-    card.className = 'checklist-group';
-    group.items.forEach((item, ii) => {
-      const key = `${gi}-${ii}`;
-      const div = document.createElement('div');
-      div.className = 'cl-item' + (checkState[key] ? ' checked' : '');
-      div.id = 'cli-' + key;
-      div.innerHTML = `
-        <div class="cl-checkbox"><span class="cl-check-icon">✓</span></div>
-        <div class="cl-item-text">
-          <div class="cl-item-name">${item.name}</div>
-          <div class="cl-item-note">${item.note}</div>
-        </div>
-        <span class="cl-priority ${item.priority === 'high' ? 'pri-high' : 'pri-med'}">${item.priority === 'high' ? 'Essential' : 'Useful'}</span>`;
-      div.onclick = () => toggleCheck(key, div);
+// TRANSPORT
+function buildTransport(){
+  TRANSPORT.forEach(item=>{
+    const sec=item.section==='start'?'t-start':'t-between';
+    const card=document.createElement('div');
+    card.className='tr-c';
+    card.innerHTML=`
+      <div class="tr-h">
+        <div class="tr-hi">${item.icon}</div>
+        <div><div class="tr-ht">${item.title}</div><div class="tr-hs">${item.sub}</div></div>
+      </div>
+      ${item.rows.map(r=>`<div class="tr-r"><div><div class="tr-from">${I.arrow}${r.from}</div><div class="tr-d">${r.d}</div></div><a class="tr-lnk" href="${r.l}" target="_blank">${r.lt} ${I.ext}</a></div>`).join('')}`;
+    document.getElementById(sec).appendChild(card);
+  });
+}
+
+// CHECKLIST
+function buildCL(){
+  const a=document.getElementById('cla');
+  CL_DATA.forEach((g,gi)=>{
+    const st=document.createElement('div');
+    st.className='st';
+    st.innerHTML=`${g.icon} ${g.g}`;
+    a.appendChild(st);
+    const card=document.createElement('div');
+    card.className='cl-g';
+    g.items.forEach((item,ii)=>{
+      const key=`${gi}-${ii}`;
+      const div=document.createElement('div');
+      div.className='cl-i'+(checks[key]?' checked':'');
+      div.innerHTML=`
+        <div class="cl-cb">${I.check}</div>
+        <div class="cl-it"><div class="cl-in">${item.n}</div><div class="cl-nt">${item.note}</div></div>
+        <span class="cl-pri ${item.p==='hi'?'pri-hi':'pri-md'}">${item.p==='hi'?I.alert+'Essential':I.info+'Useful'}</span>`;
+      div.onclick=()=>{
+        checks[key]=!checks[key];
+        div.classList.toggle('checked',!!checks[key]);
+        try{localStorage.setItem('cc',JSON.stringify(checks));}catch(e){}
+        updateCLProg();
+      };
       card.appendChild(div);
     });
-    area.appendChild(card);
+    a.appendChild(card);
   });
-  updateChecklistProgress();
+  updateCLProg();
 }
 
-function toggleCheck(key, el) {
-  checkState[key] = !checkState[key];
-  el.classList.toggle('checked', !!checkState[key]);
-  localStorage.setItem('caminoChecks', JSON.stringify(checkState));
-  updateChecklistProgress();
+function updateCLProg(){
+  const total=CL_DATA.reduce((a,g)=>a+g.items.length,0);
+  const done=Object.values(checks).filter(Boolean).length;
+  const pct=total?Math.round(done/total*100):0;
+  document.getElementById('clcnt').textContent=`${done} / ${total} packed`;
+  document.getElementById('clf').style.width=pct+'%';
 }
 
-function resetChecklist() {
-  checkState = {};
-  localStorage.removeItem('caminoChecks');
-  document.querySelectorAll('.cl-item').forEach(el => el.classList.remove('checked'));
-  updateChecklistProgress();
+function resetCL(){
+  checks={};
+  try{localStorage.removeItem('cc');}catch(e){}
+  document.querySelectorAll('.cl-i').forEach(el=>el.classList.remove('checked'));
+  updateCLProg();
 }
 
-function updateChecklistProgress() {
-  const total = CHECKLIST.reduce((a,g) => a + g.items.length, 0);
-  const done = Object.values(checkState).filter(Boolean).length;
-  const pct = total ? Math.round(done/total*100) : 0;
-  document.getElementById('cl-count').textContent = `${done} / ${total} packed`;
-  document.getElementById('cl-fill').style.width = pct + '%';
-}
-
-// ═══════════════════════════════════════
-// PROGRESS TRACKER
-// ═══════════════════════════════════════
-function updateProgress() {
-  const done = parseInt(localStorage.getItem('caminoProgress') || '0');
-  const total = 77.7;
-  const pct = Math.round(done/total*100);
-  const el = document.getElementById('prog-fill');
-  const pt = document.getElementById('prog-pct');
-  if (el) el.style.width = pct + '%';
-  if (pt) pt.textContent = pct + '%';
-}
-
-// ═══════════════════════════════════════
-// SERVICE WORKER (inline)
-// ═══════════════════════════════════════
-if ('serviceWorker' in navigator) {
-  const swCode = `
-    const CACHE = 'camino-v1';
-    const ASSETS = [location.href];
-    self.addEventListener('install', e => e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS))));
-    self.addEventListener('fetch', e => e.respondWith(caches.match(e.request).then(r => r || fetch(e.request))));
-  `;
-  const swBlob = new Blob([swCode], { type: 'application/javascript' });
-  const swURL = URL.createObjectURL(swBlob);
-  navigator.serviceWorker.register(swURL, { scope: '/' }).catch(() => {});
-}
-
-// ═══════════════════════════════════════
 // INIT
-// ═══════════════════════════════════════
-buildWeatherPage();
-buildChecklist();
-updateStagePicker(1);
-updateProgress();
+buildWeather();
+buildTransport();
+buildCL();
+updatePicker(1);
 
-// Render stage 1 detail on first visit to stages tab
-document.querySelector('[data-page="stages"]').addEventListener('click', () => {
-  setTimeout(() => {
-    if (!document.getElementById('echart' + currentStage)) {
-      renderStageDetail(currentStage);
-    }
-  }, 50);
-}, { once: false });
+// Service Worker for offline
+if('serviceWorker' in navigator){
+  const sw=`const C='cv1';self.addEventListener('install',e=>e.waitUntil(caches.open(C).then(c=>c.add('/'))));self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request))));`;
+  const url=URL.createObjectURL(new Blob([sw],{type:'application/javascript'}));
+  navigator.serviceWorker.register(url).catch(()=>{});
+}
 </script>
 </body>
 </html>
