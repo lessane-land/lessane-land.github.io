@@ -967,10 +967,35 @@ buildTransport();
 buildCL();
 updatePicker(1);
 
-// Standalone PWA: the safe-area-inset-bottom CSS already handles the home indicator.
-// No JS gap-fix needed — using 100dvh on #app lets the app fill the full viewport
-// and the tab bar's padding-bottom:env(safe-area-inset-bottom) reserves space for
-// the home indicator without leaving a visible gap below the bar.
+// 🔬 DIAGNOSTIC OVERLAY — temporary, helps us figure out the PWA gap
+(function diagnose(){
+  var probe = document.createElement('div');
+  probe.style.cssText = 'position:fixed;bottom:0;left:0;right:0;padding:8px 12px;background:#ff00aa;color:#fff;font:11px/1.3 monospace;z-index:9999;pointer-events:none;text-align:left';
+  document.body.appendChild(probe);
+
+  // Measure safe-area-inset-bottom by reading from a hidden element
+  var sai = document.createElement('div');
+  sai.style.cssText = 'position:fixed;bottom:env(safe-area-inset-bottom);left:0;width:1px;height:1px;';
+  document.body.appendChild(sai);
+
+  function update() {
+    var tabs = document.querySelector('.tabs');
+    var rect = tabs ? tabs.getBoundingClientRect() : null;
+    var saiRect = sai.getBoundingClientRect();
+    var safeBottom = window.innerHeight - saiRect.bottom; // approx safe-area-inset-bottom
+    probe.innerHTML =
+      'innerH: ' + window.innerHeight +
+      ' | docH: ' + document.documentElement.clientHeight +
+      ' | screenH: ' + screen.height +
+      ' | safeBot~: ' + safeBottom.toFixed(0) +
+      '<br>standalone: ' + window.navigator.standalone +
+      ' | tabs.bottom: ' + (rect ? rect.bottom.toFixed(0) : 'n/a') +
+      ' | tabs.height: ' + (rect ? rect.height.toFixed(0) : 'n/a');
+  }
+  setTimeout(update, 100);
+  setTimeout(update, 600);
+  window.addEventListener('resize', update);
+})();
 
 
 
